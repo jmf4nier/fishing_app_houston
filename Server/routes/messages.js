@@ -1,0 +1,58 @@
+const router = require('express').Router();
+let Message = require('../models/message.model');
+
+router.get('/', (req, res) => {
+  
+  Message.find()
+  .then(data => res.json(data))
+  .catch(err=> res.status(400).json({error: "something happened!"}))
+  
+});
+
+router.route('/add').post((req, res) => {
+  
+  const content = req.body.content;
+  const lake_id = req.body.lake_id;
+  const replies = req.body.replies;
+  const author = req.body.author;
+  const date = req.body.date;
+    
+  const newMessage = new Message({
+    lake_id,
+    replies,
+    author,
+    content,
+    content,
+    date
+  });
+
+  newMessage.save()
+  .then((data) => res.json(data))
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// router.route('/:id').get((req, res) => {
+//   message.findById(req.params.id)
+//     .then(message => res.json(message))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
+
+router.route('/:id').delete((req, res) => {
+  Message.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Message deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+  Message.findById(req.params.id)
+    .then(message => {
+      message.content = req.body.content;
+      
+      message.save()
+        .then(() => res.json('Message updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+module.exports = router;

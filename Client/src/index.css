@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.App{
+  text-align: center
+}
+.comment-group{
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.164);
+  /* opacity: 0.5; */
+  border-width: 1px;
+  border-radius: 10%;
+  padding: 2em;
+  width: 100%;
+}
+.lake-show-content{
+  text-align: left;
+}
+#lakeIndex{
+  margin: 1em;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.lakeShowInfo{
+  text-align: center;
+  margin-left: 6em;
+}
+#sideNav{
+  position: fixed;
+  left: 0; 
+                                /*fixes the navbar to the side even while scrolling*/
+  
+}
+
+#main-title{
+  font-size: 50px
+}
+#lakeIndexHeading{
+  
+}
+.lakeCards{
+  
+  margin-left:6em;
+}
