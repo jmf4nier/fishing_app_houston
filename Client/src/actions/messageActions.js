@@ -1,8 +1,13 @@
 import { FETCH_MESSAGES, POST_MESSAGE } from './types';
 
 
-export const fetchMessages = () => dispatch =>{
-    fetch('http://localhost:5000/messages/')
+export const fetchMessages = (id) => dispatch =>{
+    
+    const url = new URL('http://localhost:5000/messages/')
+    const params = {lake_id: id}    
+    // sets the passed in lake_id to params for the request for access in the server.
+    url.search = new URLSearchParams(params)
+    fetch(url)
     .then(res => res.json())
     .then(result => dispatch({
         type: FETCH_MESSAGES,

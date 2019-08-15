@@ -3,23 +3,49 @@ import { connect } from 'react-redux'
 import {fetchMessages, postMessage} from '../actions/messageActions'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import { EventEmitter } from 'events';
+import ReplyBox from './replyBox'
+
 
 class Messages extends React.Component{
 
     state={
-        message: ''
+        message: '',
+        isReply: false,
+        idChosen: null
     }
 
     componentDidMount(){
-        this.props.fetchMessages();
-    }
-    handleChange = (event)=>{
+        this.props.fetchMessages(this.props.lake._id);
+        //passing the current lake's id to the fetch to get only related messages
+    };
+
+    handleChange = (event) =>{
         const content = event.target.value
+        if (event.target.name === 'comment'){
+            
+            this.setState({
+                message: content
+            })
+        }else if (event.target.name === 'reply'){
+            this.setState({
+                reply: content
+            })
+        }
+    };
+
+    handleReplies = (indexOfReply) => {
+        
         this.setState({
-            message: content
+            isReply: !this.state.isReply,
+            idChosen: indexOfReply
         })
-    }
-    handleSubmit = (event)=>{
+    };
+
+    handleReplySubmit = () => {
+
+    };
+
+    handleCommentSubmit = (event) =>{
         
         const messageContent = this.state.message
         const data = {
@@ -29,14 +55,24 @@ class Messages extends React.Component{
             content: messageContent,
             date: new Date()
         }
-            
          this.props.postMessage(data);
     }
 
-    render(){
-        
+    render () {
+        const commentField = 
+            <Form reply onSubmit={()=>this.handleSubmit()} >
+                <Form.TextArea name='comment' style = {{ height:'50px' }} onChange = { event => this.handleChange(event) } />
+                <Button content='Post Comment' labelPosition='left' icon='edit' primary />
+            </Form>
+
+        const replyField = 
+            <Form reply onSubmit={()=>this.handleSubmit()} >
+                <Form.TextArea name ='reply' style = {{ height:'50px' }} onChange= { event => this.handleChange(event)} />
+                <Button content ='Reply' labelPosition ='left' icon ='edit' primary />
+            </Form>
+
         const messages = this.props.messages.map((message, index) =>(
-        <Comment key={index} style={{textAlign:'left'}}>
+            <Comment key={index} style={{textAlign:'left'}}>
             <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
             <Comment.Content>
                 <Comment.Author >{message.author}</Comment.Author>
@@ -46,11 +82,15 @@ class Messages extends React.Component{
                 <Comment.Text>
                 <p>{message.content}</p>
                 </Comment.Text>
-                <Comment.Actions>
-                <Comment.Action>Reply</Comment.Action>
+                <Comment.Actions >
+                    <Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index) }>Reply</Comment.Action>
+                    {(this.state.idChosen === index && this.state.isReply) ? replyField : null}
                 </Comment.Actions>
             </Comment.Content>
+                    
+                    
             {(message.replies.length > 0) ? message.replies.map((reply, index)=>(
+
             <Comment.Group key={index}>
                     <Comment style={{textAlign:'left'}}>
                     <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
@@ -60,13 +100,9 @@ class Messages extends React.Component{
                             <div>Just now</div>
                             </Comment.Metadata>
                             <Comment.Text>{reply.content}</Comment.Text>
-                            <Comment.Actions>
-                            <Comment.Action>Reply</Comment.Action>
-                            </Comment.Actions>
                         </Comment.Content>
                     </Comment>
-                </Comment.Group>
-        )): null}
+                </Comment.Group> )) : null}
         </Comment>
         ))
 
@@ -75,13 +111,10 @@ class Messages extends React.Component{
             
                 <Comment.Group  className='comment-group'>
                     <Header as='h1' dividing>
-                        Comments
+                        {this.props.lake.name}'s Comments
                     </Header>
                     {messages}
-                    <Form reply onSubmit={()=>this.handleSubmit()} >
-                        <Form.TextArea onChange={event=>this.handleChange(event)} />
-                        <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-                    </Form>
+                    {commentField}
                 </Comment.Group>
                 
              
