@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {fetchLakes, currentLake} from '../actions/lakeActions';
-import history from '../history';
+import history from '../../history';
 import { Grid, Header, Card, Container, Icon } from 'semantic-ui-react'
 
 
@@ -39,8 +39,8 @@ class LakeCard extends React.Component{
         ))
         
         return(
-            <Container>
-                <Grid columns={3} divided>
+            <Container >
+                <Grid style={{marginLeft:'4%'}} columns={4} divided>
                     <Grid.Row>
                         <Card.Group>
                             {lakes}

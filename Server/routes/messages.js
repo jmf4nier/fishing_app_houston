@@ -2,8 +2,9 @@ const router = require('express').Router();
 let Message = require('../models/message.model');
 
 router.get('/', (req, res) => {
+  id = req.query.lake_id      //finds id buried in get url params
   
-  Message.find()
+  Message.find({lake_id: id})
   .then(data => res.json(data))
   .catch(err=> res.status(400).json({error: "something happened!"}))
   
@@ -46,13 +47,15 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Message.findById(req.params.id)
     .then(message => {
-      message.content = req.body.content;
       
-      message.save()
-        .then(() => res.json('Message updated!'))
+        message.replies.push(req.body.reply) 
+      
+        message.save()
+      .then(data => res.json(data))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
+// newReply = data.replies[data.replies.length - 1]

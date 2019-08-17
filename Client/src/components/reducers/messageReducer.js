@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE} from '../actions/types'
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE} from '../actions/types'
 
 const initialState = {
     
@@ -19,6 +19,15 @@ export default function(state = initialState, action){
                 messages: [ ...state.messages, action.payload ] //existing array plus new object!
                 
             };
+        case PATCH_MESSAGE:
+            
+            return {
+                ...state,
+                messages: state.messages.map(message=>
+                    message._id === action.payload._id ?{
+                        ...message, replies: action.payload.replies
+                    }: message) 
+            }
         default: 
             return state;
     }

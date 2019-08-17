@@ -19,45 +19,37 @@ export default class NavBar extends React.Component{
                     this.setState({ expanded: false });
                 }}
             >
-                <SideNav id='sideNav' 
+                <SideNav 
+                    style={{backgroundColor:'lightBlue'}}
+                    id='sideNav' 
                     onSelect={(selected) => {}}
                     expanded={this.state.expanded}
                     onToggle={(expanded) => {
                         this.setState({ expanded });
                     }}
                     
-                    
                 >
                     <SideNav.Toggle />
-                    <SideNav.Nav>
+                    <SideNav.Nav >
                         <NavItem eventKey="home">
                             
                                 <NavIcon>
                                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
 
-                                <NavText>
+                                <NavText style={{fontSize:'1.5vw'}}>
                                     <Link to='/'>Home </Link>
                                 </NavText>
                         
                         </NavItem>
-                        <NavItem eventKey="charts">
+                        <NavItem eventKey="Login">
                             <NavIcon>
                                 <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
-                            <NavText>
-                                Charts
+                            <NavText style={{fontSize:'1.5vw'}}>
+                            <Link to='/login'>Login</Link>
                             </NavText>
-                            <NavItem eventKey="charts/linechart">
-                                <NavText>
-                                    Line Chart
-                                </NavText>
-                            </NavItem>
-                            <NavItem eventKey="charts/barchart">
-                                <NavText>
-                                    Bar Chart
-                                </NavText>
-                            </NavItem>
+                            
                         </NavItem>
                     </SideNav.Nav>
                 </SideNav>

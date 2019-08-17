@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {fetchMessages, postMessage} from '../actions/messageActions'
+import {fetchMessages, postMessage, patchMessage} from '../actions/messageActions'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import { EventEmitter } from 'events';
 import ReplyBox from './replyBox'
@@ -9,9 +9,11 @@ import ReplyBox from './replyBox'
 class Messages extends React.Component{
 
     state={
+        reply: {},
         message: '',
         isReply: false,
-        idChosen: null
+        idChosen: null,
+        keyChosen: null
     }
 
     componentDidMount(){
@@ -33,16 +35,28 @@ class Messages extends React.Component{
         }
     };
 
-    handleReplies = (indexOfReply) => {
+    handleReplies = (indexOfReply, idOfMessage) => {
         
         this.setState({
             isReply: !this.state.isReply,
-            idChosen: indexOfReply
+            keyChosen: indexOfReply,
+            idChosen: idOfMessage,
         })
     };
 
     handleReplySubmit = () => {
-
+        this.setState({
+            isReply: !this.state.isReply
+        })
+        const data = {
+            message_id: this.state.idChosen,
+            reply:{
+                author: 'me',
+                content: this.state.reply,
+                date: new Date()
+            }
+        }
+        this.props.patchMessage(data)
     };
 
     handleCommentSubmit = (event) =>{
@@ -60,13 +74,13 @@ class Messages extends React.Component{
 
     render () {
         const commentField = 
-            <Form reply onSubmit={()=>this.handleSubmit()} >
+            <Form reply onSubmit={()=>this.handleCommentSubmit()} >
                 <Form.TextArea name='comment' style = {{ height:'50px' }} onChange = { event => this.handleChange(event) } />
                 <Button content='Post Comment' labelPosition='left' icon='edit' primary />
             </Form>
 
         const replyField = 
-            <Form reply onSubmit={()=>this.handleSubmit()} >
+            <Form reply onSubmit={()=>this.handleReplySubmit()} >
                 <Form.TextArea name ='reply' style = {{ height:'50px' }} onChange= { event => this.handleChange(event)} />
                 <Button content ='Reply' labelPosition ='left' icon ='edit' primary />
             </Form>
@@ -83,8 +97,8 @@ class Messages extends React.Component{
                 <p>{message.content}</p>
                 </Comment.Text>
                 <Comment.Actions >
-                    <Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index) }>Reply</Comment.Action>
-                    {(this.state.idChosen === index && this.state.isReply) ? replyField : null}
+                    <Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index,message._id) }>Reply</Comment.Action>
+                    {(this.state.keyChosen === index && this.state.isReply) ? replyField : null}
                 </Comment.Actions>
             </Comment.Content>
                     
@@ -125,6 +139,6 @@ const mapStateToProps = state => ({
     messages: state.messageReducer.messages,
     lake: state.lakeReducer.currentLake
 })
-export default connect(mapStateToProps, { fetchMessages, postMessage })(Messages)
+export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage })(Messages)
 
  

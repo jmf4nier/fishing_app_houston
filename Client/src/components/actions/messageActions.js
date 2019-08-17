@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE } from './types';
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE } from '../actions/types';
 
 
 export const fetchMessages = (id) => dispatch =>{
@@ -35,4 +35,24 @@ export const postMessage = (data) => dispatch =>{
         type: POST_MESSAGE,
         payload: result
     }))
+}
+export const patchMessage = (data) => (dispatch) => {
+ console.log(data)
+fetch('http://localhost:5000/messages/update/'+data.message_id,{
+    method: 'POST',
+    headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        reply: data.reply,
+    })
+})
+.then(res => res.json())
+.then(result => 
+    
+    dispatch({
+    type: PATCH_MESSAGE,
+    payload: result
+}))
 }

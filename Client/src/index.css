@@ -21,9 +21,7 @@ body {
 .lake-show-content{
   text-align: left;
 }
-#lakeIndex{
-  margin: 1em;
-}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -40,12 +38,12 @@ code {
 }
 
 #main-title{
-  font-size: 50px
+  font-size: 3vw;
 }
 #lakeIndexHeading{
   
 }
 .lakeCards{
   
-  margin-left:6em;
+  margin-left:25%;
 }

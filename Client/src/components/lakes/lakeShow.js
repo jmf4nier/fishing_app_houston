@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import Messages from './messages'
+import Messages from '../messages/messages'
 import { Grid, Image, Header } from 'semantic-ui-react'
 
 
 class LakeShow extends React.Component{
+
+   
 
 componentDidMount(){
    
@@ -19,7 +21,7 @@ componentDidMount(){
         return(
             <Grid columns='1' container={true} centered={true} >
                 <Grid.Row>
-                    <h1 style={{marginBottom: '.5em', marginTop: '.5em', fontSize:'4em'}}>{name}</h1>
+                    <h1 style={{marginBottom: '.5em', marginTop: '.5em', fontSize:'8vw'}}>{name}</h1>
                </Grid.Row>
                 
                 <Grid.Row className='lake-show-content'> <Image src={images[0]} alt='image for lake'/> </Grid.Row>

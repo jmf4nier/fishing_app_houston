@@ -17,15 +17,18 @@ class MapContainer extends React.Component {
   
     render() {
       return (
-          <div style={{ marginRight:'85em', marginLeft:'0em'}}>
+          
             <Map
                 google={this.props.google}
                 zoom={10}
-                style={mapStyles}
+                style={{width: '70%', 
+                height: '90%', 
+                marginRight: '0',
+                marginLeft: '-35%'}}
                 initialCenter={{ lat: 29.7604, lng: -95.3698}}>
                 {this.displayMarkers()}
             </Map>
-          </div>
+          
       );
     }
   }
@@ -39,7 +42,7 @@ class MapContainer extends React.Component {
 
   const mapStyles = {
    
-    width: '80%', 
-    height: '90%', 
+    
+    
     
   };
