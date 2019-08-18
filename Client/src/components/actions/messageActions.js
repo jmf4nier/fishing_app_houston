@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE } from '../actions/types';
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_USER } from '../actions/types';
 
 
 export const fetchMessages = (id) => dispatch =>{
@@ -16,23 +16,21 @@ export const fetchMessages = (id) => dispatch =>{
 }
 export const postMessage = (data) => dispatch =>{
     console.log(data)
-    fetch('http://localhost:5000/messages/add',{
+    fetch('http://localhost:5000/signup',{
         method: 'POST',
         headers: {
             'accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            lake_id: data.lake_id ,
-            replies: data.replies,
-            author: data.author,
-            content: data.content,
-            date: data.date,
+            username: '',
+            password:  '',
+            email: '',
         })
     })
     .then(res => res.json())
     .then(result => dispatch({
-        type: POST_MESSAGE,
+        type: POST_USER,
         payload: result
     }))
 }

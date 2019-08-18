@@ -7,27 +7,32 @@ let User = require('../models/user.model');
 //     .catch(err => res.status(400).json('Error: ' + err));
 // });
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
- 
+router.route('/signup').post( async(req, res) => {
+  // const username = req.body.username;
+  // const password = req.body.password;
+ console.log(req.body)
 
-  const newUser = new User({
-    username,
-    password
-  });
-
+  const newUser = new User(req.body)
+  const token = await newUser.generateAuthToken()
   newUser.save()
-  .then(() => res.json('User added!'))
+  .then(() => res.json('User added!', { user, token }))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
-  User.findById(req.params.id)
-    .then(user => res.json(user))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+router.route('/login').post( async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const user = await User.findByCredentials(email, password)
+    if (!user) {
+        return res.status(401).send({error: 'Login failed! Check authentication credentials'})
+    }
+    const token = await user.generateAuthToken()
+    res.send({ user, token })
+} catch (error) {
+    res.status(400).send(error)
+}
 
+})
 // router.route('/:id').delete((req, res) => {
 //   User.findByIdAndDelete(req.params.id)
 //     .then((res) => res.json('User deleted.'))

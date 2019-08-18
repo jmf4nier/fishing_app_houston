@@ -24,7 +24,7 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 messages: state.messages.map(message=>
-                    message._id === action.payload._id ?{
+                    message._id === action.payload._id ?{          // finds matching message and replaces the replies Array
                         ...message, replies: action.payload.replies
                     }: message) 
             }

@@ -37,8 +37,8 @@ export default class NavBar extends React.Component{
                                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
 
-                                <NavText style={{fontSize:'1.5vw'}}>
-                                    <Link to='/'>Home </Link>
+                                <NavText style={{fontSize:'1.75vw' }}>
+                                    <Link style={{color:'black'}} to='/'>Home </Link>
                                 </NavText>
                         
                         </NavItem>
@@ -46,8 +46,8 @@ export default class NavBar extends React.Component{
                             <NavIcon>
                                 <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
-                            <NavText style={{fontSize:'1.5vw'}}>
-                            <Link to='/login'>Login</Link>
+                            <NavText style={{fontSize:'1.75vw'}}>
+                            <Link style={{color:'black'}} to='/login'>Login</Link>
                             </NavText>
                             
                         </NavItem>
