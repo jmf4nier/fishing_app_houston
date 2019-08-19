@@ -8,15 +8,14 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: {
     type: String,
-    required: true,
-    unique: true,
     trim: true,
-    minlength: 3
+    minlength: 3,
+    required: true
   },
   email: {
     type: String,
-    required: true,
     unique: true,
+    required: true,
     lowercase: true,
     validate: value => {
         if (!validator.isEmail(value)) {
@@ -26,15 +25,12 @@ const userSchema = new Schema({
   },
   password: {
     type: String, 
-    required: true,
     minlength: 5
   },
-  token: {
-    type: String,
-    required: true
-}
+  
 }, {
   timestamps: true,
+  versionKey: false
 });
 
 userSchema.pre('save', async function (next) {
@@ -50,8 +46,6 @@ userSchema.methods.generateAuthToken = async function() {
   // Generate an auth token for the user
   const user = this
   const token = jwt.encode({_id: user._id}, process.env.JWT_KEY)
-  user.token = token
-  await user.save()
   return token
 };
 

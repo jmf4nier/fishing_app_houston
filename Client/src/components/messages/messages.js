@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {fetchMessages, postMessage, patchMessage} from '../actions/messageActions'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
-import { EventEmitter } from 'events';
-import ReplyBox from './replyBox'
+import { Link } from 'react-router-dom'
 
 
 class Messages extends React.Component{
@@ -13,7 +12,8 @@ class Messages extends React.Component{
         message: '',
         isReply: false,
         idChosen: null,
-        keyChosen: null
+        keyChosen: null,
+        // imageFile: null
     }
 
     componentDidMount(){
@@ -22,7 +22,7 @@ class Messages extends React.Component{
     };
 
     handleChange = (event) =>{
-        const content = event.target.value
+        const content = event.target
         if (event.target.name === 'comment'){
             
             this.setState({
@@ -31,6 +31,11 @@ class Messages extends React.Component{
         }else if (event.target.name === 'reply'){
             this.setState({
                 reply: content
+            })
+        }else if (event.target.name === 'image'){
+            console.log(content)
+            this.setState({
+                imageFile: content
             })
         }
     };
@@ -58,6 +63,15 @@ class Messages extends React.Component{
         }
         this.props.patchMessage(data)
     };
+    // handlePicSubmit = (e) => {
+    //     this.setState({
+    //         isReply: !this.state.isReply
+    //     })
+    //     const data = {
+    //         imagePath: this.state.imageFile
+    //         }
+    //     this.props.postImage(data)
+    // }
 
     handleCommentSubmit = (event) =>{
         
@@ -73,6 +87,14 @@ class Messages extends React.Component{
     }
 
     render () {
+        const token = window.localStorage.getItem('token')
+
+        // const picUploadField = 
+        //     <Form onSubmit={(e)=>this.handlePicSubmit(e)}>
+        //         <Form.Input type='file' name='image'  style = {{ marginTop: '.5em'}} onChange = { event => this.handleChange(event) }   />
+        //         <Button content='Upload Photo' labelPosition='left' icon='edit' primary />
+        //     </Form>
+
         const commentField = 
             <Form reply onSubmit={()=>this.handleCommentSubmit()} >
                 <Form.TextArea name='comment' style = {{ height:'50px' }} onChange = { event => this.handleChange(event) } />
@@ -97,8 +119,8 @@ class Messages extends React.Component{
                 <p>{message.content}</p>
                 </Comment.Text>
                 <Comment.Actions >
-                    <Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index,message._id) }>Reply</Comment.Action>
-                    {(this.state.keyChosen === index && this.state.isReply) ? replyField : null}
+                    {(token !== null)?<Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index,message._id) }>Reply</Comment.Action>:null}
+                    {(this.state.keyChosen === index && this.state.isReply) ? <div>{replyField } </div>: null}
                 </Comment.Actions>
             </Comment.Content>
                     
@@ -119,7 +141,8 @@ class Messages extends React.Component{
                 </Comment.Group> )) : null}
         </Comment>
         ))
-
+        
+        
         
         return(
             
@@ -128,7 +151,7 @@ class Messages extends React.Component{
                         {this.props.lake.name}'s Comments
                     </Header>
                     {messages}
-                    {commentField}
+                    {(token !== null ) ? commentField : <Link to='/login'>Login To Post Messages</Link>}
                 </Comment.Group>
                 
              
@@ -139,6 +162,6 @@ const mapStateToProps = state => ({
     messages: state.messageReducer.messages,
     lake: state.lakeReducer.currentLake
 })
-export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage })(Messages)
+export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage,  })(Messages)
 
  

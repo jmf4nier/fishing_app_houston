@@ -1,8 +1,9 @@
-import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE} from '../actions/types'
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_IMAGE} from '../actions/types'
 
 const initialState = {
     
-    messages: []
+    messages: [],
+    images: []
 }
 
 export default function(state = initialState, action){
@@ -28,6 +29,12 @@ export default function(state = initialState, action){
                         ...message, replies: action.payload.replies
                     }: message) 
             }
+        // case POST_IMAGE:
+        //         return {
+        //             ...state,
+        //             images: [ ...state.images, action.payload ] //existing array plus new object!
+                        
+        //         };
         default: 
             return state;
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import {Link} from 'react-router-dom'
 import ClickOutside from './clickOutside'
@@ -9,7 +9,9 @@ export default class NavBar extends React.Component{
     state={
         expanded: false
     }
-    
+     handleLogout = () => {
+        localStorage.removeItem('token')
+     }
 
     render(){
         
@@ -48,6 +50,15 @@ export default class NavBar extends React.Component{
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
                             <Link style={{color:'black'}} to='/login'>Login</Link>
+                            </NavText>
+                            
+                        </NavItem>
+                        <NavItem eventKey="Logout">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                            </NavIcon>
+                            <NavText style={{fontSize:'1.75vw'}}>
+                            <Link onClick={()=> this.handleLogout()} style={{color:'black'}} to='/login'>Logout</Link>
                             </NavText>
                             
                         </NavItem>

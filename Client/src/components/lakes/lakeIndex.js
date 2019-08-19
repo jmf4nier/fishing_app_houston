@@ -15,7 +15,7 @@ class LakeIndex extends React.Component{
 
     render(){
         
-       
+       console.log(this.props.user.username)
         
         return(
           
@@ -23,7 +23,7 @@ class LakeIndex extends React.Component{
                 <Grid id='lake-index' style={{margin:'1%'}} columns='1'  centered={true} >
                     
                         <Grid.Row   >
-                            <MainHeader/>
+                            {(this.props.user.username === '')?<MainHeader/>:<div>{this.props.user.username}<MainHeader/></div>}
                         </Grid.Row>
                         <Grid.Row style={{height:'500px'}} >
                             <MapContainer lakes={this.props.lakes}/>
@@ -39,6 +39,7 @@ class LakeIndex extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    lakes: state.lakeReducer.lakes
+    lakes: state.lakeReducer.lakes,
+    user: state.userReducer.currentUser
 })
  export default connect(mapStateToProps, { })(LakeIndex)

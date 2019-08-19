@@ -1,6 +1,9 @@
 const router = require('express').Router();
 let Message = require('../models/message.model');
 
+
+
+
 router.get('/', (req, res) => {
   id = req.query.lake_id      //finds id buried in get url params
   
@@ -57,5 +60,6 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+
 module.exports = router;
-// newReply = data.replies[data.replies.length - 1]

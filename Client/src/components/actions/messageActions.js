@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_USER } from '../actions/types';
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_IMAGE} from '../actions/types';
 
 
 export const fetchMessages = (id) => dispatch =>{
@@ -16,21 +16,23 @@ export const fetchMessages = (id) => dispatch =>{
 }
 export const postMessage = (data) => dispatch =>{
     console.log(data)
-    fetch('http://localhost:5000/signup',{
+    fetch('http://localhost:5000/messages/add',{
         method: 'POST',
         headers: {
             'accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: '',
-            password:  '',
-            email: '',
+            lake_id: data.lake_id ,
+            replies: data.replies,
+            author: data.author,
+            content: data.content,
+            date: data.date,
         })
     })
     .then(res => res.json())
     .then(result => dispatch({
-        type: POST_USER,
+        type: POST_MESSAGE,
         payload: result
     }))
 }
@@ -54,3 +56,20 @@ fetch('http://localhost:5000/messages/update/'+data.message_id,{
     payload: result
 }))
 }
+// export const postImage = (data) => dispatch =>{
+//     console.log(data)
+//     fetch('http://localhost:5000/upload',{
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': "multipart/form-data"
+//         },
+//         body: {
+//             imageFile: data
+//         }
+//     })
+//     .then(res => res.json())
+//     .then(result => dispatch({
+//         type: POST_IMAGE,
+//         payload: result
+//     }))
+// }

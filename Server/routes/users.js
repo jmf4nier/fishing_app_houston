@@ -7,29 +7,27 @@ let User = require('../models/user.model');
 //     .catch(err => res.status(400).json('Error: ' + err));
 // });
 
-router.route('/signup').post( async(req, res) => {
+router.route('/signup').post((req, res) => {
   // const username = req.body.username;
   // const password = req.body.password;
- console.log(req.body)
+ 
 
-  const newUser = new User(req.body)
-  const token = await newUser.generateAuthToken()
-  newUser.save()
-  .then(() => res.json('User added!', { user, token }))
+  const user =  new User(req.body)
+  user.save()
+  .then(() => res.json('Account Created'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/login').post( async (req, res) => {
+  
   try {
     const { email, password } = req.body
     const user = await User.findByCredentials(email, password)
-    if (!user) {
-        return res.status(401).send({error: 'Login failed! Check authentication credentials'})
-    }
     const token = await user.generateAuthToken()
-    res.send({ user, token })
+    const username = user.username
+    res.send( {username , token} )
 } catch (error) {
-    res.status(400).send(error)
+    res.status(400).json({error:'Incorrect Login Credentials. Please Try Again'})
 }
 
 })
@@ -49,7 +47,7 @@ router.route('/update/:id').post((req, res) => {
         .then(() => res.json('User password updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json('Error '));
 });
 
 module.exports = router;

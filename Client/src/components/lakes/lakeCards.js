@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {fetchLakes, currentLake} from '../actions/lakeActions';
 import history from '../../history';
-import { Grid, Header, Card, Container, Icon } from 'semantic-ui-react'
+import { Grid, Card, Container } from 'semantic-ui-react'
 
 
 class LakeCard extends React.Component{
@@ -21,7 +21,7 @@ class LakeCard extends React.Component{
             
                 <Grid.Column key={lake._id}>
                     <Card style={{margin:'.5em'}} centered onClick={ () => this.handleClick(lake) } key={`${lake._id} + 1`}>
-                        <img src={lake.images[0]}  height='200px' width='auto' />
+                        <img src={lake.images[0]}  height='200px' width='auto' alt='lake' />
                         <Card.Content>
                             <Card.Header>{lake.name}</Card.Header>
                             <Card.Meta>

@@ -40,9 +40,4 @@ class MapContainer extends React.Component {
 
  
 
-  const mapStyles = {
-   
-    
-    
-    
-  };
+  
