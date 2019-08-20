@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_IMAGE} from '../actions/types';
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE } from '../actions/types';
 
 
 export const fetchMessages = (id) => dispatch =>{
@@ -38,7 +38,7 @@ export const postMessage = (data) => dispatch =>{
 }
 export const patchMessage = (data) => (dispatch) => {
  console.log(data)
-fetch('http://localhost:5000/messages/update/'+data.message_id,{
+fetch('http://localhost:5000/messages/update/'+ data.message_id,{
     method: 'POST',
     headers: {
         'accept': 'application/json',
@@ -56,20 +56,3 @@ fetch('http://localhost:5000/messages/update/'+data.message_id,{
     payload: result
 }))
 }
-// export const postImage = (data) => dispatch =>{
-//     console.log(data)
-//     fetch('http://localhost:5000/upload',{
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': "multipart/form-data"
-//         },
-//         body: {
-//             imageFile: data
-//         }
-//     })
-//     .then(res => res.json())
-//     .then(result => dispatch({
-//         type: POST_IMAGE,
-//         payload: result
-//     }))
-// }

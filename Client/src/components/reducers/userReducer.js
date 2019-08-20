@@ -1,8 +1,10 @@
-import { POST_USER, LOGIN_USER } from '../actions/types'
+import { POST_USER, LOGIN_USER, SHOW_LOGIN, SHOW_SIGNUP } from '../actions/types'
 
 const initialState = {
     currentUser: '',
     token: '',
+    showLogin: false,
+    showSignup: false,
 }
 
 export default function(state = initialState, action){
@@ -16,6 +18,16 @@ export default function(state = initialState, action){
             return {
                 ...state, 
                 currentUser: action.payload
+            };
+        case SHOW_LOGIN:
+            return {
+                ...state, 
+                showLogin: action.payload
+            };
+        case SHOW_SIGNUP:
+            return {
+                ...state, 
+                showSignup: action.payload
             };
         default: 
             return state;

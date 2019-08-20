@@ -26,7 +26,7 @@ import { connect } from 'react-redux';
           <NavBar/>
           <Route exact path='/' component={LakeIndex}/>
           <Route path='/lakes/:id' component={LakeShow}/>
-          <Route exact path='/login' component={Login}/>
+          {/* <Route exact path='/login' component={Login}/> */}
           <Route exact path='/signup' component={SignUp}/>
         </Router>
         

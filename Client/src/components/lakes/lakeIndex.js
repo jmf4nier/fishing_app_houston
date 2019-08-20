@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import LakeCard from './lakeCards'
 import MapContainer from '../googleMaps/googleMaps'
 import MainHeader from '../header';
+import Login from '../userForms/login'
+import SignUp from '../userForms/signUp'
 
 
 class LakeIndex extends React.Component{
@@ -15,13 +17,15 @@ class LakeIndex extends React.Component{
 
     render(){
         
-       console.log(this.props.user.username)
+       
         
         return(
           
                 
                 <Grid id='lake-index' style={{margin:'1%'}} columns='1'  centered={true} >
-                    
+                    {(this.props.showLogin) ? <Login/> : null}
+                    {(this.props.showSignup) ? <SignUp/>: null}
+                   
                         <Grid.Row   >
                             {(this.props.user.username === '')?<MainHeader/>:<div>{this.props.user.username}<MainHeader/></div>}
                         </Grid.Row>
@@ -32,6 +36,7 @@ class LakeIndex extends React.Component{
                             <LakeCard/>
                         </Grid.Row>
                     
+               
                 </Grid>
            
         )
@@ -40,6 +45,8 @@ class LakeIndex extends React.Component{
 
 const mapStateToProps = state => ({
     lakes: state.lakeReducer.lakes,
-    user: state.userReducer.currentUser
+    user: state.userReducer.currentUser,
+    showLogin: state.userReducer.showLogin,
+    showSignup: state.userReducer.showSignup
 })
  export default connect(mapStateToProps, { })(LakeIndex)

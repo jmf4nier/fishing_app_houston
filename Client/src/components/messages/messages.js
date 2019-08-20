@@ -22,7 +22,7 @@ class Messages extends React.Component{
     };
 
     handleChange = (event) =>{
-        const content = event.target
+        const content = event.target.value
         if (event.target.name === 'comment'){
             
             this.setState({
@@ -74,12 +74,12 @@ class Messages extends React.Component{
     // }
 
     handleCommentSubmit = (event) =>{
-        
+        const author = this.props.currentUser.username
         const messageContent = this.state.message
         const data = {
             lake_id: this.props.lake._id,
             replies: [],
-            author: 'shannon',
+            author: author,
             content: messageContent,
             date: new Date()
         }
@@ -87,13 +87,9 @@ class Messages extends React.Component{
     }
 
     render () {
-        const token = window.localStorage.getItem('token')
+        console.log(this.props.currentUser)
 
-        // const picUploadField = 
-        //     <Form onSubmit={(e)=>this.handlePicSubmit(e)}>
-        //         <Form.Input type='file' name='image'  style = {{ marginTop: '.5em'}} onChange = { event => this.handleChange(event) }   />
-        //         <Button content='Upload Photo' labelPosition='left' icon='edit' primary />
-        //     </Form>
+        const token = window.localStorage.getItem('token')
 
         const commentField = 
             <Form reply onSubmit={()=>this.handleCommentSubmit()} >
@@ -119,8 +115,11 @@ class Messages extends React.Component{
                 <p>{message.content}</p>
                 </Comment.Text>
                 <Comment.Actions >
+
                     {(token !== null)?<Comment.Action style={{color:'blue', opacity:'.5'}} onClick = { () => this.handleReplies(index,message._id) }>Reply</Comment.Action>:null}
+
                     {(this.state.keyChosen === index && this.state.isReply) ? <div>{replyField } </div>: null}
+
                 </Comment.Actions>
             </Comment.Content>
                     
@@ -160,7 +159,8 @@ class Messages extends React.Component{
 }
 const mapStateToProps = state => ({
     messages: state.messageReducer.messages,
-    lake: state.lakeReducer.currentLake
+    lake: state.lakeReducer.currentLake,
+    currentUser: state.userReducer.currentUser
 })
 export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage,  })(Messages)
 

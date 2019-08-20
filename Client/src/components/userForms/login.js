@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Form, Container } from 'semantic-ui-react';
+import { Form, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux'
-import { loginUser } from '../actions/userActions'
+import { loginUser, showSignup, showLogin } from '../actions/userActions'
 import history from '../../history';
 
 class Login extends React.Component{
@@ -12,6 +12,7 @@ class Login extends React.Component{
         email: null,
         loggedIn: null,
         error: '',
+        showSignup: false,
 }
 
 componentWillReceiveProps(newProps){
@@ -26,6 +27,18 @@ componentWillReceiveProps(newProps){
         })
     }
  }
+
+handleShowSignupClick = async () => {
+
+    await this.setState({
+        showSignup: !this.state.showSignup
+    })
+    await this.props.showLogin(false)
+    this.props.showSignup(this.state.showSignup)
+}
+handleCancelClick = () => {
+    this.props.showLogin(false)
+}
 
 handleSubmit = () => {
     
@@ -54,13 +67,13 @@ handleChange = (e) => {
 }
 
     render(){
-       
+       console.log(this.state.showSignup)
 
         return(
             
                 
             
-            <Container>
+            <Container style={{backgroundColor: 'lightBlue', width:'60%', height:'40%'}}>
              <h1 style={{marginTop:'3%'}}>Login Page</h1>
              {(this.state.error)? window.alert(this.state.error): null}
              <Form onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'15%'}}>
@@ -69,17 +82,20 @@ handleChange = (e) => {
                      <Form.Input fluid name='email' label='Registered  Email' placeholder='Email@email.com' onChange={ (e) => this.handleChange(e)} />
                      <Form.Input fluid name='password' label='Password' placeholder='Password' type='password' onChange={ (e) => this.handleChange(e)} />
                  </Form.Group>
-                 <Form.Button>Login</Form.Button>
-                 <Link to='/login'>Cancel</Link>
+                 <Form.Button size='medium' >Login</Form.Button>
+                 
            </Form>
-           <h4><Link to='/signup'>Need to Create an Account?</Link></h4>
-           <h4><Link to='/'>I Don't Want to Sign-in</Link></h4>
+           <Button onClick={ () => this.handleCancelClick() } color='red' tabIndex={1}  size='medium' style={{ margin:'1%' }}>Cancel</Button>
+           <h4 style={{margin:'1%'}} onClick={() => this.handleShowSignupClick()}><a href="#">Need to Create an Account?</a></h4>
+           
+           
              
            </Container>   
         )
     }
 }
 const mapStateToProps = state => ({
-    currentUser: state.userReducer.currentUser
+    currentUser: state.userReducer.currentUser,
+    showLogin: state.userReducer.showLogin
 })
-export default connect(mapStateToProps, { loginUser })(Login)
+export default connect(mapStateToProps, { loginUser, showSignup, showLogin })(Login)

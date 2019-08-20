@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Container } from 'semantic-ui-react';
+import { Form, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { postUser} from '../actions/userActions'
+import { postUser, showLogin, showSignup} from '../actions/userActions'
 import history  from '../../history'
 
 class SignUp extends React.Component{
@@ -12,15 +12,22 @@ class SignUp extends React.Component{
             email: null,
             error: null,
     }
-    componentWillReceiveProps(newProps){
-       if(newProps.currentUser === 'Account Created'){
-          history.push('/login') 
+    //designed to see what incoming props look like and set either and error message or redirect to the login page
+    componentWillReceiveProps(newProps){                    
+       if( newProps.currentUser === 'Account Created'){
+          this.props.showSignup(false)
+          this.props.showLogin(true)
+
        }else{
            console.log(newProps.currentUser)
            this.setState({
                error: newProps.currentUser
            })
        }
+    }
+    handleCancelClick = async ()=>{
+        await this.props.showSignup(false)
+        this.props.showLogin(true)
     }
 
     handleSubmit = () => {
@@ -53,7 +60,7 @@ class SignUp extends React.Component{
     render(){
         
         return(
-            <Container>
+            <Container style={{backgroundColor: 'lightBlue', width:'60%', height:'40%'}}>
                 <h1 style={{marginTop:'3%'}}>Signup Page</h1>
                 {(this.state.error)?<div>{this.state.error}</div>: null}
                 <Form onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'60%', marginLeft:'20%', marginTop:'15%'}}>
@@ -63,7 +70,7 @@ class SignUp extends React.Component{
                         <Form.Input fluid name='email' label='Email' placeholder='Email@email.com' onChange={ (event) => this.handleChange(event) } />
                     </Form.Group>
                     <Form.Button>Submit</Form.Button>
-                    <Link to='/login'>Cancel</Link>
+                    <Button onClick={ () => this.handleCancelClick() } color='red' tabIndex={1}  size='medium' style={{ margin:'1%' }}>Cancel</Button>
                 </Form> 
           </Container>   
            
@@ -71,6 +78,8 @@ class SignUp extends React.Component{
     }
 }
 const mapStateToProps = state => ({
-    currentUser: state.userReducer.currentUser
+    currentUser: state.userReducer.currentUser,
+    showSignup: state.userReducer.showSignup,
+    showLogin: state.userReducer.showLogin
 })
-export default connect(mapStateToProps, { postUser })(SignUp)
+export default connect(mapStateToProps, { postUser, showLogin, showSignup })(SignUp)

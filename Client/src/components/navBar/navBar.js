@@ -3,17 +3,27 @@ import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import {Link} from 'react-router-dom'
 import ClickOutside from './clickOutside'
+import { showLogin } from '../actions/userActions'
+import { connect } from 'react-redux'
 
-export default class NavBar extends React.Component{
+class NavBar extends React.Component{
 
     state={
-        expanded: false
+        expanded: false,
+        showLogin: false
     }
      handleLogout = () => {
         localStorage.removeItem('token')
      }
+     handleLoginClick = async () => {
+        await this.setState({
+            showLogin: !this.state.showLogin
+        })
+        this.props.showLogin(this.state.showLogin)
+     }
 
     render(){
+        console.log(this.state.showLogin)
         
         return(
             <ClickOutside style={{}}
@@ -44,12 +54,12 @@ export default class NavBar extends React.Component{
                                 </NavText>
                         
                         </NavItem>
-                        <NavItem eventKey="Login">
+                        <NavItem eventKey="Login" onClick={()=>this.handleLoginClick()}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
-                            <Link style={{color:'black'}} to='/login'>Login</Link>
+                                <p style={{color:'black'}}>Login</p>
                             </NavText>
                             
                         </NavItem>
@@ -58,7 +68,7 @@ export default class NavBar extends React.Component{
                                 <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
-                            <Link onClick={()=> this.handleLogout()} style={{color:'black'}} to='/login'>Logout</Link>
+                            <p onClick={()=> {this.handleLogout(); this.handleLoginClick()}} style={{color:'black'}} >Logout</p>
                             </NavText>
                             
                         </NavItem>
@@ -68,3 +78,7 @@ export default class NavBar extends React.Component{
         )
     }
 }
+const mapStateToProps = state => ({
+    
+})
+export default connect(mapStateToProps, { showLogin })(NavBar)

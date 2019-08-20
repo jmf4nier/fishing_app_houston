@@ -1,4 +1,4 @@
-import { POST_USER, LOGIN_USER } from './types';
+import { POST_USER, LOGIN_USER, SHOW_LOGIN, SHOW_SIGNUP } from './types';
 
 export const postUser = (data) => dispatch =>{
     console.log(data)
@@ -40,4 +40,18 @@ export const loginUser = (data) => dispatch =>{
         type: LOGIN_USER,
         payload: result
     }))
+}
+export const showLogin = (state) => dispatch =>{
+    console.log(state)
+    dispatch({
+        type: SHOW_LOGIN,
+        payload: state
+    })
+}
+export const showSignup = (state) => dispatch =>{
+    console.log(state)
+    dispatch({
+        type: SHOW_SIGNUP,
+        payload: state
+    })
 }

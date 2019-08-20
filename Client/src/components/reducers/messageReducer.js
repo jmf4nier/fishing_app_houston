@@ -29,12 +29,6 @@ export default function(state = initialState, action){
                         ...message, replies: action.payload.replies
                     }: message) 
             }
-        // case POST_IMAGE:
-        //         return {
-        //             ...state,
-        //             images: [ ...state.images, action.payload ] //existing array plus new object!
-                        
-        //         };
         default: 
             return state;
     }
