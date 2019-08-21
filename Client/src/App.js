@@ -12,7 +12,8 @@ import { connect } from 'react-redux';
  class App extends React.Component{
   
   componentDidMount(){
-    
+      window.scrollTo(0,0)
+  
   }
   
 
@@ -27,8 +28,6 @@ import { connect } from 'react-redux';
           <NavBar/>
           <Route exact path='/' component={LakeIndex}/>
           <Route exact path='/lakes/:id' component={LakeShow}/>
-          {/* <Route exact path='/login' component={Login}/> */}
-          <Route exact path='/signup' component={SignUp}/>
         </Router>
         
       </div>

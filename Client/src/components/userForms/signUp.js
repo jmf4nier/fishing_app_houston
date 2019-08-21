@@ -72,16 +72,16 @@ class SignUp extends React.Component{
     render(){
         
         return(
-            <Container style={{backgroundColor: 'lightBlue', width:'60%', height:'40%'}}>
-                <h1 style={{marginTop:'3%', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Sign up!</h1>
+            <Container id='signup-div' style={{backgroundColor: 'lightBlue', width:'90%', height:'40%'}}>
+                <h1 style={{marginTop:'3%', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Sign Up!</h1>
                 {(this.state.error)?<div>{this.state.error}</div>: null}
-                <Form  id='signup-form' onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'60%', marginLeft:'20%', marginTop:'10%'}}>
-                    <Form.Group widths='equal'>
+                <Form  id='signup-form' onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'80%', marginLeft:'10%', marginTop:'10%'}}>
+                    <Form.Group style = {{fontSize: '150%'}} widths='equal'>
                         <Form.Input fluid name='username' label='Username' placeholder='Username' onChange={ (event) => this.handleChange(event) }/>
                         <Form.Input fluid name='password' label='Password' placeholder='Password' type='password' onChange={ (event) => this.handleChange(event) } />
                         <Form.Input fluid name='email' label='Email' placeholder='Email@email.com' onChange={ (event) => this.handleChange(event) } />
                     </Form.Group>
-                    <Form.Button>Submit</Form.Button>
+                    <Form.Button >Submit</Form.Button>
                     <Button onClick={ () => this.handleCancelClick() } color='red' tabIndex={1}  size='medium' style={{ margin:'1%' }}>Cancel</Button>
                 </Form> 
           </Container>   

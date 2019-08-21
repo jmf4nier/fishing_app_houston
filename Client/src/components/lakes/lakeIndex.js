@@ -8,12 +8,18 @@ import { currentLake } from '../actions/lakeActions'
 
 class LakeIndex extends React.Component{
 
-    // componentDidMount(){
-    //     this.props.fetchLakes();
-    // }
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     handleMarkerChoice = ( lake )=>{        //callback function passed as prop to mapContainer and recieves chosen lake
         console.log(lake)
         this.props.currentLake( lake )
+    }
+
+    capitalizeUsername = (name)=> {
+        if (name !== undefined){
+        return name.charAt(0).toUpperCase() + name.slice(1);
+        }else{return null}
     }
 
     render(){
@@ -21,24 +27,25 @@ class LakeIndex extends React.Component{
         
         const header = 
             <Container text>
-                <i className="far fa-user" style={{position:'absolute',     right:'3%', top:'.5%', fontSize:'1.5vw'}}>
-                    No User Logged in
-                </i>
+                <i className="far fa-user" style={{color:'white',position:'absolute', right:'3%', top:'.5%', fontSize:'1.5vw'}}>  No User Logged in</i>
               
-                <Header  as='h1' id='main-title'>
-                    <i className="fas fa-fish" style={{marginRight:'3%', color:'lightBlue', fontSize:'60px'}}></i>
-                    Houston Area fishing
-                    <i className="fas fa-fish" style={{ marginLeft:'3%',color:'lightBlue',fontSize:'60px'}}></i>
+                <Header  as='h1' >
+                    <i className="fas fa-fish" style={{ textShadow: '4px 4px rgba(173, 170, 170, 0.534)', fontSize:'3vw',}}></i>
+                    <p id='main-title'>Houston Area Fishing</p>
+                    <i className="fas fa-fish" style={{ textShadow: '4px 4px rgba(173, 170, 170, 0.534)', fontSize:'3vw',}}></i>
                 </Header>
             </Container>
 
         const headerWithName = 
+            
             <Container text>
-                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'2vw'}}><p style={{margin:'1%', display:'inline'}}>{this.props.user.username}</p></i>
-                <Header  as='h1' id='main-title'>
-                    <i className="fas fa-fish" style={{marginRight:'3%', color:'lightBlue', fontSize:'60px'}}></i>
-                    Houston Area fishing
-                    <i className="fas fa-fish" style={{ marginLeft:'3%',color:'lightBlue',fontSize:'60px'}}></i>
+
+                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'1.5vw'}}><p style={{margin:'1%', display:'inline'}}>  {this.capitalizeUsername(this.props.user.username)}</p></i>
+
+                <Header  as='h1' style={{textShadow: '4px 4px rgb(173, 169, 169' }}>
+                    <i className="fas fa-fish" style={{marginRight:'3%', color:'lightBlue', fontSize:'100%'}}></i>
+                    <p>Houston Area Fishing</p>
+                    <i className="fas fa-fish" style={{ marginLeft:'3%',color:'lightBlue',fontSize:'100%'}}></i>
                 </Header>
             </Container>
        
@@ -53,7 +60,7 @@ class LakeIndex extends React.Component{
                         <Grid.Row style={{height:'500px'}} >
                             <MapContainer lakes={this.props.lakes} handleMarkerChoice={this.handleMarkerChoice}/>  
                         </Grid.Row>
-                        <Grid.Row style={{marginLeft:'10%'}}  >
+                        <Grid.Row style={{ marginTop:'2%'}}  >
                             <LakeCard/>
                         </Grid.Row>
                     

@@ -10,10 +10,6 @@ export default class PictureGallery extends React.Component {
         images.push({
         original: `${pic}`,
         thumbnail: `${pic}`,
-        originalClass: 'featured-slide',
-        thumbnailClass: 'featured-thumb',
-        thumbnailPosition: 'left',
-        showBullets: true,
       },)
       
     

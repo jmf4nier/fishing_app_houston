@@ -67,10 +67,10 @@ class MapContainer extends React.Component {
             <Map
                 google={this.props.google}
                 zoom={10}
-                style={{width: '70%', 
-                height: '90%', 
+                style={{width: '80%', 
+                height: '100%', 
                 marginRight: '0%',
-                marginLeft: '-35%',
+                marginLeft: '-40%',
                 borderStyle:'ridge',
                 borderWidth:"8px",
                 borderColor:'lightBlue'}}

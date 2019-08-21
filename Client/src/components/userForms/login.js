@@ -1,10 +1,13 @@
 import React from 'react';
-import { Form, Container, Button } from 'semantic-ui-react';
+import { Form, Container, Button, } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { loginUser, showSignup, showLogin } from '../actions/userActions'
 
 
 class Login extends React.Component{
+    componentDidMount(){
+        
+    }
 
     state = {
         password: null,
@@ -70,12 +73,13 @@ handleChange = (e) => {
             
                 
             
-            <Container style={{backgroundColor: 'lightBlue', width:'60%', height:'40%'}}>
-             <h1 style={{marginTop:'3%'}}>Login Page</h1>
+            <Container id='login-div' style={{ width:'90%', height:'40%'}}>
+             <h1 style={{marginTop:'3%', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Login</h1>
              
-             <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'15%'}}>
+             <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'5%'}}>
                      
-                 <Form.Group widths='equal'>
+                 <Form.Group style = {{fontSize: '150%'}} widths='equal'>
+                     
                      <Form.Input fluid name='email' label='Registered  Email' placeholder='Email@email.com' onChange={ (e) => this.handleChange(e)} />
                      <Form.Input fluid name='password' label='Password' placeholder='Password' type='password' onChange={ (e) => this.handleChange(e)} />
                  </Form.Group>

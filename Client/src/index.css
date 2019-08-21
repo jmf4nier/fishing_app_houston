@@ -1,7 +1,7 @@
 @import "../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 body {
-  background-color: aliceblue;
+  background-color: rgb(29, 53, 75);
   
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -10,24 +10,58 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .featured-slide{
-  height: 10;
-  width: 100%;
+  height: 500px;
+  width: 700px;
+}
+#showpage-title{
+  margin-bottom: .5em;
+  color:rgba(255, 255, 255, 0.883);
+  margin-top: .5em;
+  font-size: 4vw;
+  font-family: 'Times New Roman', Times, serif;
+  text-shadow: 5px 5px rgba(0, 0, 0, 0.924);
+  border-bottom-style: ridge;
+  border-bottom-width: 5px
+}
+#gallery-div{
+  background-color:rgb(248, 246, 246);
+  border-style: ridge;
+  border-width: 10px;
+  border-radius: 2%;
+  
+}
+#signup-div{
+  background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
+  
+  background-position: center;
+  background-size: cover;
+  
+}
+#login-div{
+  background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
+  
+  background-position: center;
+  background-size: cover;
   
 }
 .App{
   text-align: center
 }
 .comment-group{
-  border-style: solid;
+  border-style: ridge;
+  font-size: 1vw;
+  overflow-y:auto;
   border-color: rgba(0, 0, 0, 0.164);
   /* opacity: 0.5; */
-  border-width: 1px;
-  border-radius: 10%;
+  border-width: 5px;
+  border-radius: 2%;
   padding: 2em;
   width: 100%;
+  height: 800px;
 }
 .lake-show-content{
-  text-align: left;
+
+  font-size: 2vw;
 }
 
 code {
@@ -40,6 +74,7 @@ code {
 }
 #sideNav{
   position: fixed;
+
   left: 0; 
                                 /*fixes the navbar to the side even while scrolling*/
   
@@ -47,11 +82,13 @@ code {
 
 #main-title{
   font-size: 3vw;
+  color:rgba(236, 240, 243, 0.986);
   font-family: 'Times New Roman', Times, serif;
+  text-shadow: 5px 5px rgb(0, 0, 0)
   
 }
 
 .lakeCards{
   
-  margin-left:25%;
+  /* margin-left:25%; */
 }

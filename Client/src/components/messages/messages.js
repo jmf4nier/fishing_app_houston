@@ -63,7 +63,11 @@ class Messages extends React.Component{
         }
         this.props.patchMessage(data)
     };
-    
+    capitalizeUsername = (name)=> {
+        if (name !== undefined){
+        return name.charAt(0).toUpperCase() + name.slice(1);
+        }else{return null}
+    }
 
     handleCommentSubmit = (event) =>{
         const author = this.props.currentUser.username
@@ -96,10 +100,10 @@ class Messages extends React.Component{
             </Form>
 
         const messages = this.props.messages.map((message, index) =>(
-            <Comment key={index} style={{textAlign:'left'}}>
+            <Comment key={index} style={{textAlign:'left', fontSize:'1.25vw'}}>
             <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
             <Comment.Content>
-                <Comment.Author >{message.author}</Comment.Author>
+                <Comment.Author >{this.capitalizeUsername(message.author)}</Comment.Author>
                 <Comment.Metadata>
                 <div>Yesterday at 12:30AM</div>
                 </Comment.Metadata>
@@ -119,10 +123,10 @@ class Messages extends React.Component{
             {(message.replies.length > 0) ? message.replies.map((reply, index)=>(
 
             <Comment.Group key={index}>
-                    <Comment style={{textAlign:'left'}}>
+                    <Comment style={{textAlign:'left',fontSize:'1.25vw'}}>
                     <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
                         <Comment.Content>
-                            <Comment.Author>{reply.author}</Comment.Author>
+                            <Comment.Author>{this.capitalizeUsername(reply.author)}</Comment.Author>
                             <Comment.Metadata>
                             <div>Just now</div>
                             </Comment.Metadata>
@@ -137,14 +141,14 @@ class Messages extends React.Component{
         
         return(
             
-                <Comment.Group  className='comment-group'>
-                    <Header as='h1' dividing>
+                <Comment.Group  className='comment-group' style={{backgroundColor:'rgb(248, 246, 246)'}} >
+                    <Header as='h1' dividing style={{fontSize:'1.5'}}>
                         {this.props.lake.name}'s Comments
                     </Header>
                     {messages}
                     {(token !== null ) ? commentField : <h3 onClick={()=>{
                         this.props.showLogin(true)
-                        window.scrollTo(0,0) ////scrolls to top of window when login clicked
+                        window.scrollTo(0,0)                                    ////scrolls to top of window when login clicked
                         }} >Login To Comment</h3> }
                 </Comment.Group>
                 

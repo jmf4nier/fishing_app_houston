@@ -34,7 +34,7 @@ class NavBar extends React.Component{
                 }}
             >
                 <SideNav 
-                    style={{backgroundColor:'lightBlue'}}
+                    style={{backgroundColor:'black'}}
                     id='sideNav' 
                     onSelect={(selected) => {}}
                     expanded={this.state.expanded}
@@ -69,7 +69,7 @@ class NavBar extends React.Component{
                                 
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
-                                <p style={{color:'black'}}>Login</p>
+                                <p >Login</p>
                             </NavText>
                             
                         </NavItem>
@@ -78,7 +78,7 @@ class NavBar extends React.Component{
                                 <i className="fas fa-sign-out-alt" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
-                            <p onClick={()=> {this.handleLogout(); this.handleLoginClick()}} style={{color:'black'}} >Logout</p>
+                            <p onClick={()=> {this.handleLogout(); this.handleLoginClick()}}  >Logout</p>
                             </NavText>
                             
                         </NavItem>

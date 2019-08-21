@@ -19,8 +19,8 @@ class LakeCard extends React.Component{
     render(){
         const lakes = this.props.lakes.map(lake =>(
             
-                <Grid.Column key={lake._id}>
-                    <Card style={{margin:'.5em'}} centered onClick={ () => this.handleClick(lake) } key={`${lake._id} + 1`}>
+                
+                    <Card style={{margin:'2em', }}  onClick={ () => this.handleClick(lake) } key={`${lake._id} + 1`}>
                         <img src={lake.images[0]}  height='200px' width='auto' alt='lake' />
                         <Card.Content>
                             <Card.Header>{lake.name}</Card.Header>
@@ -34,20 +34,18 @@ class LakeCard extends React.Component{
                         <Card.Content extra>
                         </Card.Content>
                     </Card>
-                </Grid.Column>
+                
             
         ))
         
         return(
-            <Container >
-                <Grid style={{marginLeft:'4%'}} columns={4} divided>
+           
+                <Grid  >
                     <Grid.Row>
-                        <Card.Group>
-                            {lakes}
-                       </Card.Group>
+                       {lakes.map((lake) => <div style ={{flex: '25'}}> {lake}</div>)}
                     </Grid.Row>
                 </Grid>
-            </Container>
+            
           
         ) 
     }
