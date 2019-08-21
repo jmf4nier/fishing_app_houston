@@ -1,8 +1,8 @@
-import { POST_USER, LOGIN_USER, SHOW_LOGIN, SHOW_SIGNUP } from './types';
+import { POST_USER, LOGIN_USER, SHOW_LOGIN, SHOW_SIGNUP, LOGOUT_USER } from './types';
 
-export const postUser = (data) => dispatch =>{
+export const postUser = (data) =>  async dispatch =>{
     console.log(data)
-    fetch('http://localhost:5000/users/signup',{
+    let res = await fetch('http://localhost:5000/users/signup',{
         method: 'POST',
         headers: {
             'accept': 'application/json',
@@ -14,15 +14,15 @@ export const postUser = (data) => dispatch =>{
             email: data.email
         })
     })
-    .then(res => res.json())
-    .then(result => dispatch({
+    let result = await res.json()
+    dispatch({
         type: POST_USER,
         payload: result
-    }))
+    })
 }
-export const loginUser = (data) => dispatch =>{
+export const loginUser = (data) => async dispatch =>{
     console.log(data)
-    fetch('http://localhost:5000/users/login',{
+    let res = await fetch('http://localhost:5000/users/login',{
         method: 'POST',
         headers: {
             'accept': 'application/json',
@@ -33,13 +33,27 @@ export const loginUser = (data) => dispatch =>{
             email: data.email
         })
     })
-    .then(res => res.json())
-    .then(result => 
-        
-        dispatch({
-        type: LOGIN_USER,
-        payload: result
-    }))
+      let result = await res.json()
+      window.localStorage.setItem('token', result.token)
+      dispatch({
+                type: LOGIN_USER,
+                payload: result
+            })
+    // .then(res => res.json())
+    // .then(result => {
+    //     window.localStorage.setItem('token', result.token)
+    //     dispatch({
+    //         type: LOGIN_USER,
+    //         payload: result
+    //     })
+    // })
+}
+export const logoutUser = () => dispatch =>{
+    
+    dispatch({
+        type: LOGOUT_USER,
+        payload: ''
+    })
 }
 export const showLogin = (state) => dispatch =>{
     console.log(state)

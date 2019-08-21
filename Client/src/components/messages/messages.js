@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {fetchMessages, postMessage, patchMessage} from '../actions/messageActions'
+import {fetchMessages, postMessage, patchMessage} from '../actions/messageActions';
+import { showLogin } from '../actions/userActions'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+
 
 
 class Messages extends React.Component{
@@ -13,7 +14,6 @@ class Messages extends React.Component{
         isReply: false,
         idChosen: null,
         keyChosen: null,
-        // imageFile: null
     }
 
     componentDidMount(){
@@ -63,15 +63,7 @@ class Messages extends React.Component{
         }
         this.props.patchMessage(data)
     };
-    // handlePicSubmit = (e) => {
-    //     this.setState({
-    //         isReply: !this.state.isReply
-    //     })
-    //     const data = {
-    //         imagePath: this.state.imageFile
-    //         }
-    //     this.props.postImage(data)
-    // }
+    
 
     handleCommentSubmit = (event) =>{
         const author = this.props.currentUser.username
@@ -87,10 +79,10 @@ class Messages extends React.Component{
     }
 
     render () {
-        console.log(this.props.currentUser)
+       
 
         const token = window.localStorage.getItem('token')
-
+        
         const commentField = 
             <Form reply onSubmit={()=>this.handleCommentSubmit()} >
                 <Form.TextArea name='comment' style = {{ height:'50px' }} onChange = { event => this.handleChange(event) } />
@@ -150,7 +142,10 @@ class Messages extends React.Component{
                         {this.props.lake.name}'s Comments
                     </Header>
                     {messages}
-                    {(token !== null ) ? commentField : <Link to='/login'>Login To Post Messages</Link>}
+                    {(token !== null ) ? commentField : <h3 onClick={()=>{
+                        this.props.showLogin(true)
+                        window.scrollTo(0,0) ////scrolls to top of window when login clicked
+                        }} >Login To Comment</h3> }
                 </Comment.Group>
                 
              
@@ -161,7 +156,8 @@ const mapStateToProps = state => ({
     messages: state.messageReducer.messages,
     lake: state.lakeReducer.currentLake,
     currentUser: state.userReducer.currentUser
+
 })
-export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage,  })(Messages)
+export default connect(mapStateToProps, { fetchMessages, postMessage, patchMessage, showLogin  })(Messages)
 
  

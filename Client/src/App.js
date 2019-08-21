@@ -21,11 +21,12 @@ import { connect } from 'react-redux';
     
     return (
       <div className="App">
-        
+        {(this.props.showLogin) ? <Login/> : null}
+        {(this.props.showSignup) ? <SignUp/>: null}
         <Router history={history}>
           <NavBar/>
           <Route exact path='/' component={LakeIndex}/>
-          <Route path='/lakes/:id' component={LakeShow}/>
+          <Route exact path='/lakes/:id' component={LakeShow}/>
           {/* <Route exact path='/login' component={Login}/> */}
           <Route exact path='/signup' component={SignUp}/>
         </Router>
@@ -36,7 +37,9 @@ import { connect } from 'react-redux';
 }
 
 const mapStateToProps = state => ({
-  lake: state.lakeReducer.currentLake
+  lake: state.lakeReducer.currentLake,
+  showLogin: state.userReducer.showLogin,
+  showSignup: state.userReducer.showSignup
 })
 export default connect(mapStateToProps, {  })(App)
 

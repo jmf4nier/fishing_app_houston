@@ -25,7 +25,7 @@ class LakeCard extends React.Component{
                         <Card.Content>
                             <Card.Header>{lake.name}</Card.Header>
                             <Card.Meta>
-                                <span className='date'>Joined in 2015</span>
+                                <span className='city'>{lake.locality}</span>
                             </Card.Meta>
                             <Card.Description>
                                 {lake.species.join(', ')}

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { Form, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { loginUser, showSignup, showLogin } from '../actions/userActions'
-import history from '../../history';
+
 
 class Login extends React.Component{
 
@@ -13,20 +12,8 @@ class Login extends React.Component{
         loggedIn: null,
         error: '',
         showSignup: false,
+        currentUser: ''
 }
-
-componentWillReceiveProps(newProps){
-    if(newProps.currentUser.username !== ''){
-        
-        window.localStorage.setItem('token', newProps.currentUser.token)
-        history.push('/') 
-    }else{
-        
-        this.setState({
-            error: newProps.currentUser.error
-        })
-    }
- }
 
 handleShowSignupClick = async () => {
 
@@ -40,21 +27,31 @@ handleCancelClick = () => {
     this.props.showLogin(false)
 }
 
-handleSubmit = () => {
+handleSubmit = async () => {
     
     const data = this.state
-    this.props.loginUser(data)
-    this.setState({
+    await this.props.loginUser(data)
+    await this.setState({
         password: null,
-        email: null
+        email: null,
     })
-    if(this.props.currentUser === 'Login failed! Check authentication credentials'){
-        console.log(this.props.currentUser)
+    
+    if(this.props.currentUser.error){
+        window.alert(this.props.currentUser.error)
+        let form = document.getElementById('login-form')
+        form.reset()
+    }else{
         
+        let name = this.props.currentUser.username
+        const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
+        window.alert(`Welcome ${capitalizedName}`)
+        this.props.showLogin(false)
     }
 }
 handleChange = (e) => {
     const info = e.target.value
+    
+    
     if (e.target.name === 'password'){
         this.setState({
             password: info
@@ -67,7 +64,7 @@ handleChange = (e) => {
 }
 
     render(){
-       console.log(this.state.showSignup)
+       
 
         return(
             
@@ -75,8 +72,8 @@ handleChange = (e) => {
             
             <Container style={{backgroundColor: 'lightBlue', width:'60%', height:'40%'}}>
              <h1 style={{marginTop:'3%'}}>Login Page</h1>
-             {(this.state.error)? window.alert(this.state.error): null}
-             <Form onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'15%'}}>
+             
+             <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'15%'}}>
                      
                  <Form.Group widths='equal'>
                      <Form.Input fluid name='email' label='Registered  Email' placeholder='Email@email.com' onChange={ (e) => this.handleChange(e)} />

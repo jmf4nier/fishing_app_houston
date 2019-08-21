@@ -15,7 +15,7 @@ router.route('/signup').post((req, res) => {
   const user =  new User(req.body)
   user.save()
   .then(() => res.json('Account Created'))
-  .catch(err => res.status(400).json('Error: ' + err));
+  .catch(err => res.status(400).json({error: 'Email Already in Use. Try Another'}));
 });
 
 router.route('/login').post( async (req, res) => {

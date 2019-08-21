@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE, POST_IMAGE} from '../actions/types'
+import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE} from '../actions/types'
 
 const initialState = {
     

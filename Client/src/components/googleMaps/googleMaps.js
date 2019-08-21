@@ -1,21 +1,68 @@
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import React from 'react';
-// import { connect } from 'react-redux';
+import history from '../../history';
+import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import { currentLake } from '../actions/lakeActions';
 
 class MapContainer extends React.Component {
+
+  state = {
+    showingInfoWindow: false,
+    selectedCoordinates: {},
+    selectedLake: {}
+  }
+
     
-  
-    displayMarkers = () => {
+  handlePushtoShowPage = () =>{
+    
+     currentLake(this.state.selectedLake)
+      // history.push(`/lakes/${this.state.selectedLake._id}`)
+  }
+
+  onMarkerClick = (lake)=>{
+    const lakeCoordinates = lake.coordinates
+    this.setState({
+      selectedCoordinates: lakeCoordinates,
+      selectedLake: lake,
+      showingInfoWindow: !this.state.showingInfoWindow
+    })
+  }
+
+    
+  displayMarkers = () => {
       return this.props.lakes.map((lake, index) => {
-        return <Marker key={index} id={index} position={{
-         lat: lake.coordinates.latitude,
-         lng: lake.coordinates.longitude
+        return <Marker onClick={(e) => this.onMarkerClick( lake , e )} key={index} id={index} text='lake marker' position={{
+         lat: lake.coordinates.lat,
+         lng: lake.coordinates.lng
        }}
-       onClick={() => console.log("You clicked me!")} />
+        />
       })
     }
+  onInfoWindowOpen() {
+    
+    const link = 
+    <a onClick={() => this.handlePushtoShowPage()}> 
+    {this.state.selectedLake.name}
+    </a>
+    ReactDOM.render(
+      React.Children.only(link),
+      document.getElementById("name-link")
+      )
+  }
+  onClose = () => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        selectedPlace: {}
+      })
+    }
+}
+
+
   
     render() {
+      console.log(this.state.selectedLake.name)
       return (
           
             <Map
@@ -23,10 +70,29 @@ class MapContainer extends React.Component {
                 zoom={10}
                 style={{width: '70%', 
                 height: '90%', 
-                marginRight: '0',
-                marginLeft: '-35%'}}
+                marginRight: '0%',
+                marginLeft: '-35%',
+                borderStyle:'ridge',
+                borderWidth:"8px",
+                borderColor:'lightBlue'}}
                 initialCenter={{ lat: 29.7604, lng: -95.3698}}>
                 {this.displayMarkers()}
+                <InfoWindow 
+                    position={this.state.selectedCoordinates}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                    onOpen={e => {
+                    this.onInfoWindowOpen();
+                    }}
+                > 
+                  <h4 id='name-link' >
+                    
+                  </h4>
+                  <p>
+                    {this.state.selectedLake.description}
+                  </p>
+                </InfoWindow>
+
             </Map>
           
       );
@@ -37,6 +103,11 @@ class MapContainer extends React.Component {
     apiKey: 'AIzaSyBDIzsWrPiktdWsGZ4f0EM4FLMHVslvki0'
   })(MapContainer)
 
+  const mapStateToProps = state => ({
+    
+})
+
+ connect(mapStateToProps, { currentLake })(MapContainer)
 
  
 
