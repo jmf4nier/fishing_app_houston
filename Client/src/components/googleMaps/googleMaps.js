@@ -2,8 +2,8 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import React from 'react';
 import history from '../../history';
 import ReactDOM from 'react-dom'
-import { connect } from 'react-redux'
-import { currentLake } from '../actions/lakeActions';
+
+
 
 class MapContainer extends React.Component {
 
@@ -15,9 +15,8 @@ class MapContainer extends React.Component {
 
     
   handlePushtoShowPage = () =>{
-    
-     currentLake(this.state.selectedLake)
-      // history.push(`/lakes/${this.state.selectedLake._id}`)
+     this.props.handleMarkerChoice(this.state.selectedLake)   //callback from lakeIndex that accepts the chosen lake and operates redux currentLake method
+      history.push(`/lakes/${this.state.selectedLake._id}`)
   }
 
   onMarkerClick = (lake)=>{
@@ -62,7 +61,7 @@ class MapContainer extends React.Component {
 
   
     render() {
-      console.log(this.state.selectedLake.name)
+      console.log(this.props)
       return (
           
             <Map
@@ -103,11 +102,8 @@ class MapContainer extends React.Component {
     apiKey: 'AIzaSyBDIzsWrPiktdWsGZ4f0EM4FLMHVslvki0'
   })(MapContainer)
 
-  const mapStateToProps = state => ({
-    
-})
+  
 
- connect(mapStateToProps, { currentLake })(MapContainer)
 
  
 

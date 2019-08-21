@@ -11,6 +11,10 @@ class LakeIndex extends React.Component{
     // componentDidMount(){
     //     this.props.fetchLakes();
     // }
+    handleMarkerChoice = ( lake )=>{        //callback function passed as prop to mapContainer and recieves chosen lake
+        console.log(lake)
+        this.props.currentLake( lake )
+    }
 
     render(){
         // const token = localStorage.getItem('token')
@@ -47,7 +51,7 @@ class LakeIndex extends React.Component{
                             {(this.props.user === '')? header : headerWithName}
                         </Grid.Row>
                         <Grid.Row style={{height:'500px'}} >
-                            <MapContainer lakes={this.props.lakes} />
+                            <MapContainer lakes={this.props.lakes} handleMarkerChoice={this.handleMarkerChoice}/>  
                         </Grid.Row>
                         <Grid.Row style={{marginLeft:'10%'}}  >
                             <LakeCard/>

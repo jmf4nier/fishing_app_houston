@@ -12,13 +12,18 @@ export default class PictureGallery extends React.Component {
         thumbnail: `${pic}`,
         originalClass: 'featured-slide',
         thumbnailClass: 'featured-thumb',
+        thumbnailPosition: 'left',
+        showBullets: true,
       },)
       
     
  )
  
     return (
-      <ImageGallery items={images} />
+      <ImageGallery style={{width:"100%"}} originalClass= 'featured-slide'
+      thumbnailClass= 'featured-thumb'
+      thumbnailPosition= 'left'
+      showBullets= {true} items={images} />
     );
   }
  

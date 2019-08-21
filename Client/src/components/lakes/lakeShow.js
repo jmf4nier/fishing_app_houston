@@ -24,7 +24,7 @@ componentDidMount(){
                 <Grid.Row>
                     <h1 style={{marginBottom: '.5em', marginTop: '.5em', fontSize:'8vw'}}>{name}</h1>
                </Grid.Row>
-                <Grid.Row><PictureGallery lakePics={this.props.lake.images}/></Grid.Row>
+                <Grid.Row style={{backgroundColor:'darkGrey',borderRadius:'10%'}}><PictureGallery lakePics={this.props.lake.images}/></Grid.Row>
                 {/* <Grid.Row className='lake-show-content'> <Image src={images[0]} alt='image for lake'/> </Grid.Row> */}
                 <Grid.Row className='lake-show-content'> <h4><strong>Coordinates:</strong> <p>lat: {lat} long: {long}</p> </h4></Grid.Row>    
                 <Grid.Row className='lake-show-content'> <h4><strong>Species:</strong> <p>{species.join(', ')}</p></h4> </Grid.Row>   

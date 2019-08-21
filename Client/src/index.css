@@ -10,8 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .featured-slide{
-  height: 500px;
-  width: 700px;
+  height: 10;
+  width: 100%;
+  
 }
 .App{
   text-align: center
