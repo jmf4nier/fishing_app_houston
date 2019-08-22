@@ -29,9 +29,9 @@ class LakeIndex extends React.Component{
             <Container text>
                 <i className="far fa-user" style={{color:'white',position:'absolute', right:'3%', top:'.5%', fontSize:'1.5vw'}}>  No User Logged in</i>
               
-                <Header  as='h1' >
+                <Header  as='h1' style={{marginTop:'1%'}} >
                     <i className="fas fa-fish" style={{ textShadow: '4px 4px rgba(173, 170, 170, 0.534)', fontSize:'3vw',}}></i>
-                    <p id='main-title'>Houston Area Fishing</p>
+                    <p className='main-title'>Houston Area Freshwater Fishing</p>
                     <i className="fas fa-fish" style={{ textShadow: '4px 4px rgba(173, 170, 170, 0.534)', fontSize:'3vw',}}></i>
                 </Header>
             </Container>
@@ -40,11 +40,11 @@ class LakeIndex extends React.Component{
             
             <Container text>
 
-                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'1.5vw'}}><p style={{margin:'1%', display:'inline'}}>  {this.capitalizeUsername(this.props.user.username)}</p></i>
+                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'1.5vw', color:'white'}}><p style={{margin:'1%', display:'inline'}}>  {this.capitalizeUsername(this.props.user.username)}</p></i>
 
-                <Header  as='h1' style={{textShadow: '4px 4px rgb(173, 169, 169' }}>
+                <Header  as='h1' style={{textShadow: '4px 4px rgb(173, 169, 169', marginTop:'1%' }}>
                     <i className="fas fa-fish" style={{marginRight:'3%', color:'lightBlue', fontSize:'100%'}}></i>
-                    <p>Houston Area Fishing</p>
+                    <p className='main-title'>Houston Area Freshwater Fishing</p>
                     <i className="fas fa-fish" style={{ marginLeft:'3%',color:'lightBlue',fontSize:'100%'}}></i>
                 </Header>
             </Container>
@@ -60,7 +60,7 @@ class LakeIndex extends React.Component{
                         <Grid.Row style={{height:'500px'}} >
                             <MapContainer lakes={this.props.lakes} handleMarkerChoice={this.handleMarkerChoice}/>  
                         </Grid.Row>
-                        <Grid.Row style={{ marginTop:'2%'}}  >
+                        <Grid.Row style={{marginLeft:'4.5%', marginTop:'2%'}}  >
                             <LakeCard/>
                         </Grid.Row>
                     

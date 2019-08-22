@@ -20,7 +20,7 @@ class LakeCard extends React.Component{
         const lakes = this.props.lakes.map(lake =>(
             
                 
-                    <Card style={{margin:'2em', }}  onClick={ () => this.handleClick(lake) } key={`${lake._id} + 1`}>
+                    <Card style={{margin:'1em', }}  onClick={ () => this.handleClick(lake) } key={`${lake._id} + 1`}>
                         <img src={lake.images[0]}  height='200px' width='auto' alt='lake' />
                         <Card.Content>
                             <Card.Header>{lake.name}</Card.Header>

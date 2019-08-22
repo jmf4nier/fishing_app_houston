@@ -13,10 +13,9 @@ class LakeShow extends React.Component{
 
     render(){
         
-        const lake = this.props.lake
-        const lat = lake.coordinates.lat
-        const long = lake.coordinates.longitude
-        const {name,locality, species, water_quality, size_in_acres, public_access, license_required, operating_organization } = this.props.lake
+        
+        
+        const {name,locality, description, species, water_quality, size_in_acres, public_access, license_required, operating_organization } = this.props.lake
         console.log(license_required)
         return(
             <Grid columns='1' container={true} centered={true} >
@@ -24,8 +23,9 @@ class LakeShow extends React.Component{
                     <h1 id='showpage-title'>{name}</h1>
                </Grid.Row>
                 <Grid.Row id='gallery-div' ><PictureGallery lakePics={this.props.lake.images}/></Grid.Row>
+                <Grid.Row style={{fontFamily:'Times New Roman',borderStyle:'ridge', padding:'1%', textAlign:'left', marginTop:'3%', marginBottom:'3%', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.8'}}>{description}</Grid.Row>
                 <Grid.Row>
-                    <Table celled style={{borderStyle:'ridge', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246'}}>
+                    <Table celled style={{fontFamily:'Times New Roman',borderStyle:'ridge', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.8'}}>
                         <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell style={{padding:'3%'}}>Species</Table.HeaderCell>
@@ -41,11 +41,11 @@ class LakeShow extends React.Component{
                         <Table.Body>
                         <Table.Row>
                             <Table.Cell style={{padding:'3%'}}>{species.join(', ')}</Table.Cell>
-                            <Table.Cell>{public_access}</Table.Cell>
                             <Table.Cell>{size_in_acres}</Table.Cell>
-                            <Table.Cell>{(license_required)?'True':'No'}</Table.Cell>
+                            <Table.Cell>{(license_required === true)?'Yes':'No'}</Table.Cell>
                             <Table.Cell>{water_quality}</Table.Cell>
                             <Table.Cell>{operating_organization}</Table.Cell>
+                            <Table.Cell>{public_access}</Table.Cell>
                             <Table.Cell>{locality}</Table.Cell>
 
                         </Table.Row>

@@ -67,13 +67,15 @@ class MapContainer extends React.Component {
             <Map
                 google={this.props.google}
                 zoom={10}
-                style={{width: '80%', 
+                style={{width: '90%', 
                 height: '100%', 
                 marginRight: '0%',
-                marginLeft: '-40%',
+                marginLeft: '-45%',
                 borderStyle:'ridge',
-                borderWidth:"8px",
-                borderColor:'lightBlue'}}
+                borderWidth:"4px",
+                borderColor:'lightBlue',
+                borderRadius:'1%',
+                opacity:'.9'}}
                 initialCenter={{ lat: 29.7604, lng: -95.3698}}>
                 {this.displayMarkers()}
                 <InfoWindow 

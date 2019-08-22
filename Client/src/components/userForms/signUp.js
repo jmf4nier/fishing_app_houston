@@ -11,19 +11,7 @@ class SignUp extends React.Component{
             email: null,
             error: null,
     }
-    //designed to see what incoming props look like and set either and error message or redirect to the login page
-    // componentWillReceiveProps(newProps){                    
-    //    if( newProps.currentUser === 'Account Created'){
-    //       this.props.showSignup(false)
-    //       this.props.showLogin(true)
-
-    //    }else{
-    //        console.log(newProps.currentUser)
-    //        this.setState({
-    //            error: newProps.currentUser
-    //        })
-    //    }
-    // }
+   
     handleCancelClick = async ()=>{
         await this.props.showSignup(false)
         this.props.showLogin(true)
@@ -73,7 +61,7 @@ class SignUp extends React.Component{
         
         return(
             <Container id='signup-div' style={{backgroundColor: 'lightBlue', width:'90%', height:'40%'}}>
-                <h1 style={{marginTop:'3%', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Sign Up!</h1>
+                <h1 style={{marginTop:'3%', color:'white', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Sign Up!</h1>
                 {(this.state.error)?<div>{this.state.error}</div>: null}
                 <Form  id='signup-form' onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'80%', marginLeft:'10%', marginTop:'10%'}}>
                     <Form.Group style = {{fontSize: '150%'}} widths='equal'>

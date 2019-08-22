@@ -74,7 +74,7 @@ handleChange = (e) => {
                 
             
             <Container id='login-div' style={{ width:'90%', height:'40%'}}>
-             <h1 style={{marginTop:'3%', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Login</h1>
+             <h1 style={{marginTop:'3%', color:'white', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Login</h1>
              
              <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'5%'}}>
                      
