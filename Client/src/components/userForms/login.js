@@ -76,7 +76,7 @@ handleChange = (e) => {
             <Container id='login-div' style={{ width:'90%', height:'40%'}}>
              <h1 style={{marginTop:'3%', color:'white', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Login</h1>
              
-             <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'5%'}}>
+             <Form id='login-form' onSubmit={ (e) => this.handleSubmit(e)} style={{width:'60%', marginLeft:'20%', marginTop:'4%'}}>
                      
                  <Form.Group style = {{fontSize: '150%'}} widths='equal'>
                      
@@ -87,7 +87,7 @@ handleChange = (e) => {
                  
            </Form>
            <Button onClick={ () => this.handleCancelClick() } color='red' tabIndex={1}  size='medium' style={{ margin:'1%' }}>Cancel</Button>
-           <h4 style={{margin:'1%'}} onClick={() => this.handleShowSignupClick()}><a href="#">Need to Create an Account?</a></h4>
+           <h4 style={{margin:'1%'}} onClick={() => this.handleShowSignupClick()}><button style={{backgroundColor:'lightBlue', borderRadius:'3%', cursor:'pointer', textDecoration:'underline'}}>Need to Create an Account?</button></h4>
            
            
              

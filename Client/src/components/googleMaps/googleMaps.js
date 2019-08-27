@@ -41,9 +41,9 @@ class MapContainer extends React.Component {
   onInfoWindowOpen() {
     
     const link = 
-    <a onClick={() => this.handlePushtoShowPage()}> 
+    <button style={{background:' none!important', border: 'none', padding: '0!important', fontFamily: 'arial, sans-serif', color: '#069', textDecoration: 'underline',cursor: 'pointer',}} onClick={() => this.handlePushtoShowPage()}> 
     {this.state.selectedLake.name}
-    </a>
+    </button>
     ReactDOM.render(
       React.Children.only(link),
       document.getElementById("name-link")
@@ -66,14 +66,11 @@ class MapContainer extends React.Component {
           
             <Map
                 google={this.props.google}
-                zoom={10}
+                zoom={11}
                 style={{width: '90%', 
-                height: '100%', 
+                height: '700px', 
                 marginRight: '0%',
                 marginLeft: '-45%',
-                borderStyle:'ridge',
-                borderWidth:"4px",
-                borderColor:'lightBlue',
                 borderRadius:'1%',
                 opacity:'.9'}}
                 initialCenter={{ lat: 29.7604, lng: -95.3698}}>

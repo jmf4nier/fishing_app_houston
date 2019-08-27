@@ -21,8 +21,8 @@ body {
   color:rgba(255, 255, 255, 0.883);
   margin-top: .5em;
   font-size: 4vw;
-  font-family: 'Times New Roman', Times, serif;
-  text-shadow: 5px 5px rgba(0, 0, 0, 0.924);
+  font-family: 'Playfair Display', serif;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.924);
   border-bottom-style: ridge;
   border-bottom-width: 5px
 }
@@ -35,18 +35,18 @@ body {
   
 }
 #signup-div{
-  background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
+  /* background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
   
   background-position: center;
-  background-size: cover;
-  opacity: .6;
+  background-size: cover; */
+  opacity: .9;
 }
 #login-div{
-  background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
+  /* background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
   
   background-position: center;
-  background-size: cover;
-  opacity: .6;
+  background-size: cover; */
+  opacity: .9;
   
 }
 .App{
@@ -63,7 +63,7 @@ body {
   padding: 2em;
   width: 100%;
   height: 800px;
-  opacity: .75;
+  opacity: .95;
 }
 .lake-show-content{
 
@@ -87,10 +87,11 @@ code {
 }
 
 .main-title{
+  margin-top:.5vw;
   font-size: 3.5vw;
-  margin-bottom: 2%;
+  margin-bottom: 1.5%;
   color:rgba(236, 240, 243, 0.986);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Playfair Display', serif;
   text-shadow: 2px 2px rgba(114, 111, 111, 0.644);
   opacity: .9;
   

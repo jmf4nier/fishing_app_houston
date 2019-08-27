@@ -60,10 +60,10 @@ class SignUp extends React.Component{
     render(){
         
         return(
-            <Container id='signup-div' style={{backgroundColor: 'lightBlue', width:'90%', height:'40%'}}>
+            <Container id='signup-div' style={{ width:'90%', height:'40%'}}>
                 <h1 style={{marginTop:'3%', color:'white', fontFamily:'Times New Roman', fontSize:'3vw'}}>Please Sign Up!</h1>
                 {(this.state.error)?<div>{this.state.error}</div>: null}
-                <Form  id='signup-form' onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'80%', marginLeft:'10%', marginTop:'10%'}}>
+                <Form  id='signup-form' onSubmit={ (e) => this.handleSubmit(e)}  style={{width:'80%', marginLeft:'10%', marginTop:'5%'}}>
                     <Form.Group style = {{fontSize: '150%'}} widths='equal'>
                         <Form.Input fluid name='username' label='Username' placeholder='Username' onChange={ (event) => this.handleChange(event) }/>
                         <Form.Input fluid name='password' label='Password' placeholder='Password' type='password' onChange={ (event) => this.handleChange(event) } />

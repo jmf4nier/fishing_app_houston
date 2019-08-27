@@ -23,9 +23,9 @@ class LakeShow extends React.Component{
                     <h1 id='showpage-title'>{name}</h1>
                </Grid.Row>
                 <Grid.Row id='gallery-div' ><PictureGallery lakePics={this.props.lake.images}/></Grid.Row>
-                <Grid.Row style={{fontFamily:'Times New Roman',borderStyle:'ridge', padding:'1%', textAlign:'left', marginTop:'3%', marginBottom:'3%', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.8'}}>{description}</Grid.Row>
+                <Grid.Row style={{fontFamily:'Times New Roman',borderStyle:'ridge', padding:'2%', textAlign:'left', marginTop:'3%', marginBottom:'3%', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.9'}}>{description}</Grid.Row>
                 <Grid.Row>
-                    <Table celled style={{fontFamily:'Times New Roman',borderStyle:'ridge', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.8'}}>
+                    <Table celled style={{fontFamily:'Times New Roman',borderStyle:'ridge', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.9'}}>
                         <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell style={{padding:'3%'}}>Species</Table.HeaderCell>

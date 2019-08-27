@@ -146,7 +146,7 @@ class Messages extends React.Component{
                         {this.props.lake.name}'s Comments
                     </Header>
                     {messages}
-                    {(token !== null ) ? commentField : <h3 onClick={()=>{
+                    {(token !== null ) ? commentField : <h3 style={{cursor:'pointer',color:'#069'}}onClick={()=>{
                         this.props.showLogin(true)
                         window.scrollTo(0,0)                                    ////scrolls to top of window when login clicked
                         }} >Login To Comment</h3> }
