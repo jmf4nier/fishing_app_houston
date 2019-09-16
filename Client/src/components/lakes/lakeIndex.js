@@ -1,15 +1,17 @@
 import React from 'react';
 import {Header, Container, Grid, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import LakeCard from './lakeCards'
+import LakeCard from './lakeCards';
+import LakeShow from './lakeShow'
 import MapContainer from '../googleMaps/googleMaps'
 import { currentLake } from '../actions/lakeActions'
-
+import NavBar from '../navBar/navBar'
 
 class LakeIndex extends React.Component{
 
     state = {
-        mapview: false
+        mapview: false,
+        showView: false
     }
 
     componentDidMount(){
@@ -20,10 +22,16 @@ class LakeIndex extends React.Component{
             mapview: !this.state.mapview
         })
     }
-
-    handleMarkerChoice = ( lake )=>{        //callback function passed as prop to mapContainer and recieves chosen lake
-        console.log(lake)
-        this.props.currentLake( lake )
+    handleShowView = (lake) => {
+        this.props.currentLake(lake)
+        this.setState({
+            showView: true
+        })
+    }
+    handleShowAll = () => {
+        this.setState({
+            showView: false
+        })
     }
 
     capitalizeUsername = (name)=> {
@@ -37,48 +45,48 @@ class LakeIndex extends React.Component{
         
         const header = 
             <Container text>
-                <i className="far fa-user" style={{color:'white',position:'absolute', right:'3%', top:'.5%', fontSize:'1.5vw'}}>  No User Logged in</i>
-              
+                <i className="far fa-user" style={{color:'white',position:'absolute', right:'3%', top:'.5%', fontSize:'1.5vw'}}>  
+                    <p>
+                        Not Logged in
+                    </p>
+                </i>
                 <Header  as='h1' style={{marginTop:'1%'}} >
-                   
                     <p className='main-title'>Houston Area Freshwater Fishing</p>
-                    
                 </Header>
             </Container>
 
         const headerWithName = 
-            
             <Container text>
-
-                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'1.5vw', color:'white'}}><p style={{margin:'1%', display:'inline'}}>  {this.capitalizeUsername(this.props.user.username)}</p></i>
-
+                <i className="fas fa-user" style={{display:'inline', position:'absolute',right:'3%', top:'.5%', fontSize:'1.5vw', color:'white'}}>
+                    <p >
+                        {this.capitalizeUsername(this.props.user.username)}
+                    </p>
+                </i>
                 <Header  as='h1' style={{textShadow: '4px 4px rgb(173, 169, 169', marginTop:'1%' }}>
-                    
                     <p className='main-title'>Houston Area Freshwater Fishing</p>
-                    
                 </Header>
             </Container>
-       
-        
-        return(
-          
-                
-                <Grid id='lake-index' style={{margin:'1%'}} columns='1'  centered={true} >
-                        <Grid.Row   >
-                            {(this.props.user === '')? header : headerWithName}
-                        </Grid.Row>
-                        <Grid.Row> <Button color='blue' size='large' onClick={()=>this.handleMapView()}>Toggle Map View</Button>
-                        </Grid.Row>
-                        {(this.state.mapview)?<Grid.Row style={{height:'500px'}} >
-                            <MapContainer lakes={this.props.lakes} handleMarkerChoice={this.handleMarkerChoice}/>  
-                        </Grid.Row>:
-                        <Grid.Row style={{marginLeft:'4.5%', marginTop:'2%'}}  >
-                            <LakeCard/>
-                        </Grid.Row>}
-                    
-               
+
+        const lakeGrid = 
+            <Grid id='lake-index' style={{margin:'1%'}} columns='1'  centered={true} >
+                <Grid.Row>
+                    {(this.props.user === '')? header : headerWithName}
+                </Grid.Row>
+                <Grid.Row> 
+                    <Button color='blue' size='large' onClick={()=>this.handleMapView()}>Toggle Map View</Button>
+                </Grid.Row>
+                    {(this.state.mapview)?<Grid.Row style={{height:'500px'}} >
+                    <MapContainer lakes={this.props.lakes} handleMarkerChoice={this.handleShowView}/>  
+                </Grid.Row>:
+                <Grid.Row style={{marginLeft:'4.5%', marginTop:'2%'}}  >
+                    <LakeCard handleClick={this.handleShowView}/>
+                </Grid.Row>}
                 </Grid>
-           
+        return(
+            <div>
+                <NavBar handleClick={this.handleShowAll}/>
+                {(this.state.showView)? <LakeShow handleClick={this.handleShowAll}/>: lakeGrid }
+            </div>
         )
     }
 }

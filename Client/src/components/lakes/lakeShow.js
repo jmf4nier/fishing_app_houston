@@ -2,25 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom'
 import Messages from '../messages/messages'
-import { Grid, Table } from 'semantic-ui-react'
+import { Grid, Table, Button } from 'semantic-ui-react'
 import PictureGallery from './pictureGallery'
 
 class LakeShow extends React.Component{
 
    componentDidMount(){
         window.scrollTo(0,0)
+        
     }
 
     render(){
         
         
-        
+       
         const {name,locality, description, species, water_quality, size_in_acres, public_access, license_required, operating_organization } = this.props.lake
-        console.log(license_required)
+        
         return(
-            <Grid columns='1' container={true} centered={true} >
+            
+            <Grid columns='1'  centered={true} container={true} style={{marginLeft:'5%', marginRight:'1%'}} >
+                <Button onClick ={()=>this.props.handleClick()} style={{marginLeft:'3%', marginTop:'3%'}}>Return to main menu</Button>
                 <Grid.Row>
                     <h1 id='showpage-title'>{name}</h1>
+                    
                </Grid.Row>
                 <Grid.Row id='gallery-div' ><PictureGallery lakePics={this.props.lake.images}/></Grid.Row>
                 <Grid.Row style={{fontFamily:'Times New Roman',borderStyle:'ridge', padding:'2%', textAlign:'left', marginTop:'3%', marginBottom:'3%', fontSize:'1.25vw', borderWidth:'5px', borderRadius:'2%',backgroundColor:'rgb(248, 246, 246', opacity:'.9'}}>{description}</Grid.Row>
@@ -56,6 +60,7 @@ class LakeShow extends React.Component{
                 <Grid.Row>
                     <Messages/>
                 </Grid.Row>
+                
             </Grid>
         )
     }
@@ -65,11 +70,3 @@ const mapStateToProps = state => ({
 })
 export default connect(mapStateToProps, {  })(LakeShow)
 
-
-{/* <Grid.Row > <h2 className='lake-show-content'><strong>Coordinates:</strong> <p>lat: {lat} long: {long}</p> </h2></Grid.Row>    
-                <Grid.Row > <h2 className='lake-show-content'><strong>Species:</strong> <p>{species.join(', ')}</p></h2> </Grid.Row>   
-                <Grid.Row > <h2 className='lake-show-content'><strong>acres:</strong> <p></p>{size_in_acres}</h2> </Grid.Row>
-                <Grid.Row > <h2 className='lake-show-content'><strong>public Access:</strong><p>{public_access}</p> </h2> </Grid.Row>
-                <Grid.Row > <h2 className='lake-show-content'><strong>license required:</strong> <p>{license_required}</p></h2> </Grid.Row>    
-                <Grid.Row > <h2 className='lake-show-content'><strong>water quality:</strong> <p>{water_quality}</p></h2> </Grid.Row>
-                <Grid.Row > <h2 className='lake-show-content'><strong>operating organization:</strong><p>{operating_organization}</p> </h2> </Grid.Row>  */}

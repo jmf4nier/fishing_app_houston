@@ -29,50 +29,46 @@ class NavBar extends React.Component{
         
         return(
             <ClickOutside style={{}}
-                onClickOutside={() => {
+                onClickOutside = {() => {
                     this.setState({ expanded: false });
                 }}
             >
                 <SideNav 
-                    style={{backgroundColor:'black'}}
+                    style={{backgroundColor:'black' }}
                     id='sideNav' 
                     onSelect={(selected) => {}}
                     expanded={this.state.expanded}
                     onMouseOver={() => {
-                        
                         this.setState({ expanded: true });
                     }}
                     onMouseOut={() => {
-                        
                         this.setState({ expanded: false });
                     }}
-                    
                 >
-                    <SideNav.Toggle />
                     <SideNav.Nav >
-                        <NavItem onClick={()=>history.push('/')} eventKey="home">
-                            
+
+                        <NavItem onClick={()=>this.props.handleClick()} eventKey="home">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
-
                                 <NavText style={{fontSize:'1.75vw' }}>
                                     Home
                                 </NavText>
-                        
                         </NavItem>
-                        <NavItem eventKey="Login" onClick={()=>{this.handleLoginClick()
-                        window.scrollTo(0,0) ////scrolls to top of window when login clicked
+
+                        <NavItem eventKey="Login" onClick = {
+                            ()=>{this.handleLoginClick()
+                            window.scrollTo(0,0) ////scrolls to top of window when login clicked
                         }}>
                             <NavIcon>
                                 <i className="fas fa-sign-in-alt" style={{ fontSize: '1.75em' }} />
-                                
                             </NavIcon>
                             <NavText style={{fontSize:'1.75vw'}}>
                                 <p >Login</p>
                             </NavText>
                             
                         </NavItem>
+
                         <NavItem eventKey="Logout">
                             <NavIcon>
                                 <i className="fas fa-sign-out-alt" style={{ fontSize: '1.75em' }} />
@@ -80,8 +76,8 @@ class NavBar extends React.Component{
                             <NavText style={{fontSize:'1.75vw'}}>
                             <p onClick={()=> {this.handleLogout(); this.handleLoginClick()}}  >Logout</p>
                             </NavText>
-                            
                         </NavItem>
+
                     </SideNav.Nav>
                 </SideNav>
             </ClickOutside>

@@ -13,14 +13,9 @@ class MapContainer extends React.Component {
     selectedLake: {}
   }
 
-    
-  handlePushtoShowPage = () =>{
-     this.props.handleMarkerChoice(this.state.selectedLake)   //callback from lakeIndex that accepts the chosen lake and operates redux currentLake method
-      history.push(`/lakes/${this.state.selectedLake._id}`)
-  }
 
   onMarkerClick = (lake)=>{
-    const lakeCoordinates = lake.coordinates
+    const lakeCoordinates = lake.coordinates;
     this.setState({
       selectedCoordinates: lakeCoordinates,
       selectedLake: lake,
@@ -41,7 +36,9 @@ class MapContainer extends React.Component {
   onInfoWindowOpen() {
     
     const link = 
-    <button style={{background:' none!important', border: 'none', padding: '0!important', fontFamily: 'arial, sans-serif', color: '#069', textDecoration: 'underline',cursor: 'pointer',}} onClick={() => this.handlePushtoShowPage()}> 
+    <button 
+    style={{background:' none!important', border: 'none', padding: '0!important', fontFamily: 'arial, sans-serif', color: '#069', textDecoration: 'underline',cursor: 'pointer',}} 
+    onClick={() => this.props.handleMarkerChoice(this.state.selectedLake)}> 
     {this.state.selectedLake.name}
     </button>
     ReactDOM.render(
@@ -61,9 +58,7 @@ class MapContainer extends React.Component {
 
   
     render() {
-      console.log(this.props)
       return (
-          
             <Map
                 google={this.props.google}
                 zoom={11}
@@ -90,9 +85,7 @@ class MapContainer extends React.Component {
                     {this.state.selectedLake.description}
                   </p>
                 </InfoWindow>
-
             </Map>
-          
       );
     }
   }
