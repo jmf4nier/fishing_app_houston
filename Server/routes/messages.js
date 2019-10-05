@@ -1,26 +1,21 @@
-const router = require('express').Router();
-let Message = require('../models/message.model');
+const router = require("express").Router();
+let Message = require("../models/message.model");
 
+router.get("/", (req, res) => {
+  id = req.query.lake_id; //finds id buried in get url params
 
-
-
-router.get('/', (req, res) => {
-  id = req.query.lake_id      //finds id buried in get url params
-  
-  Message.find({lake_id: id})
-  .then(data => res.json(data))
-  .catch(err=> res.status(400).json({error: "something happened!"}))
-  
+  Message.find({ lake_id: id })
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json({ error: "something happened!" }));
 });
 
-router.route('/add').post((req, res) => {
-  
+router.route("/add").post((req, res) => {
   const content = req.body.content;
   const lake_id = req.body.lake_id;
   const replies = req.body.replies;
   const author = req.body.author;
   const date = req.body.date;
-    
+
   const newMessage = new Message({
     lake_id,
     replies,
@@ -30,9 +25,10 @@ router.route('/add').post((req, res) => {
     date
   });
 
-  newMessage.save()
-  .then((data) => res.json(data))
-  .catch(err => res.status(400).json('Error: ' + err));
+  newMessage
+    .save()
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 // router.route('/:id').get((req, res) => {
@@ -41,25 +37,23 @@ router.route('/add').post((req, res) => {
 //     .catch(err => res.status(400).json('Error: ' + err));
 // });
 
-router.route('/:id').delete((req, res) => {
+router.route("/:id").delete((req, res) => {
   Message.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Message deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json("Message deleted."))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route("/update/:id").post((req, res) => {
   Message.findById(req.params.id)
     .then(message => {
-      
-        message.replies.push(req.body.reply) 
-      
-        message.save()
-      .then(data => res.json(data))
-        .catch(err => res.status(400).json('Error: ' + err));
+      message.replies.push(req.body.reply);
+
+      message
+        .save()
+        .then(data => res.json(data))
+        .catch(err => res.status(400).json("Error: " + err));
     })
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json("Error: " + err));
 });
-
-
 
 module.exports = router;

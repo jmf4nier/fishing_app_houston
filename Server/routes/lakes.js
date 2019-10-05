@@ -1,28 +1,18 @@
-const router = require('express').Router();
-let Lake = require('../models/lake.model');
+const router = require("express").Router();
+let Lake = require("../models/lake.model");
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   Lake.find()
     .then(lakes => res.json(lakes))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
-
-
-router.route('/:id').get((req, res) => {
+router.route("/:id").get((req, res) => {
   Lake.findById(req.params.id)
     .then(lake => res.json(lake))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json("Error: " + err));
 });
 module.exports = router;
-
-
-
-
-
-
-
-
 
 // NOT USED AT THE MOMENT
 
@@ -46,9 +36,6 @@ module.exports = router;
 //     })
 //     .catch(err => res.status(400).json('Error: ' + err));
 // });
-
-
-
 
 // router.route('/add').post((req, res) => {
 //   const username = req.body.username;

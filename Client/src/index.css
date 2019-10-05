@@ -2,8 +2,8 @@
 
 body {
   /* background-color: rgb(29, 53, 75); */
-  background-image: url('http://getwallpapers.com/wallpaper/full/5/e/0/725471-free-fishing-backgrounds-1920x1080.jpg');
-  
+  background-image: url("http://getwallpapers.com/wallpaper/full/5/e/0/725471-free-fishing-backgrounds-1920x1080.jpg");
+
   background-position: center;
   background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -12,50 +12,48 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.featured-slide{
+.featured-slide {
   height: 500px;
   width: 700px;
 }
-#showpage-title{
-  margin-bottom: .5em;
-  color:rgba(255, 255, 255, 0.883);
-  margin-top: .5em;
+#showpage-title {
+  margin-bottom: 0.5em;
+  color: rgba(255, 255, 255, 0.883);
+  margin-top: 0.5em;
   font-size: 4vw;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.924);
   border-bottom-style: ridge;
-  border-bottom-width: 5px
+  border-bottom-width: 5px;
 }
-#gallery-div{
-  background-color:rgb(248, 246, 246);
+#gallery-div {
+  background-color: rgb(248, 246, 246);
   border-style: ridge;
   border-width: 10px;
   border-radius: 2%;
-  opacity: .95;
-  
+  opacity: 0.95;
 }
-#signup-div{
+#signup-div {
   /* background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
   
   background-position: center;
   background-size: cover; */
-  opacity: .9;
+  opacity: 0.9;
 }
-#login-div{
+#login-div {
   /* background-image: url('https://www.genomebc.ca/wp-content/uploads/2017/08/aquaculture_strat_banner-1-1200x300.jpg');
   
   background-position: center;
   background-size: cover; */
-  opacity: .9;
-  
+  opacity: 0.9;
 }
-.App{
-  text-align: center
+.App {
+  text-align: center;
 }
-.comment-group{
+.comment-group {
   border-style: ridge;
   font-size: 1vw;
-  overflow-y:auto;
+  overflow-y: auto;
   border-color: rgba(0, 0, 0, 0.164);
   /* opacity: 0.5; */
   border-width: 5px;
@@ -63,10 +61,9 @@ body {
   padding: 2em;
   width: 100%;
   height: 800px;
-  opacity: .95;
+  opacity: 0.95;
 }
-.lake-show-content{
-
+.lake-show-content {
   font-size: 2vw;
 }
 
@@ -74,30 +71,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.lakeShowInfo{
+.lakeShowInfo {
   text-align: center;
   margin-left: 6em;
 }
-#sideNav{
+#sideNav {
   position: fixed;
 
-  left: 0; 
-                                /*fixes the navbar to the side even while scrolling*/
-  
+  left: 0;
+  /*fixes the navbar to the side even while scrolling*/
 }
 
-.main-title{
-  margin-top:.5vw;
+.main-title {
+  margin-top: 0.5vw;
   font-size: 3.5vw;
   margin-bottom: 1.5%;
-  color:rgba(236, 240, 243, 0.986);
-  font-family: 'Playfair Display', serif;
+  color: rgba(236, 240, 243, 0.986);
+  font-family: "Playfair Display", serif;
   text-shadow: 2px 2px rgba(114, 111, 111, 0.644);
-  opacity: .9;
-  
+  opacity: 0.9;
 }
 
-.lakeCards{
-  
+.lakeCards {
   /* margin-left:25%; */
 }
