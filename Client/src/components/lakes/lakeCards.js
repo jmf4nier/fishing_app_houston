@@ -18,7 +18,7 @@ class LakeCard extends React.Component {
       <Card
         style={{ margin: "1em" }}
         onClick={() => this.props.handleClick(lake)}
-        key={`${lake._id} + 1`}
+        key={lake._id}
       >
         <img src={lake.images[0]} height="200px" width="auto" alt="lake" />
         <Card.Content>
@@ -35,8 +35,8 @@ class LakeCard extends React.Component {
     return (
       <Grid style={{ marginLeft: "1%", marginRight: "1%" }}>
         <Grid.Row>
-          {lakes.map(lake => (
-            <div style={{ flex: "25" }}> {lake}</div>
+          {lakes.map((lake, i) => (
+            <div key={i} style={{ flex: "25" }}> {lake}</div>
           ))}
         </Grid.Row>
       </Grid>

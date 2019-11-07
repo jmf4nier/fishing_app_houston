@@ -2,8 +2,11 @@
   "name": "finalproject",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "v12.9.1",
+    "npm": "6.10.2"
+  },
   "dependencies": {
-    "@trendmicro/react-sidenav": "^0.4.5",
     "google-maps-react": "^2.0.2",
     "history": "^4.9.0",
     "install": "^0.13.0",
@@ -16,14 +19,18 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.87.3"
+    "semantic-ui-react": "^0.87.3",
+    "serve": "^11.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
+ 
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -40,3 +47,6 @@
     ]
   }
 }
+
+
+ 

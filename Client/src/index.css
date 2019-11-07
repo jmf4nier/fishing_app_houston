@@ -1,7 +1,7 @@
 @import "../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 body {
-  /* background-color: rgb(29, 53, 75); */
+  background-color: rgb(29, 53, 75);
   background-image: url("http://getwallpapers.com/wallpaper/full/5/e/0/725471-free-fishing-backgrounds-1920x1080.jpg");
 
   background-position: center;

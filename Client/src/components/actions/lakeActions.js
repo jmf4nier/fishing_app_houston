@@ -2,7 +2,7 @@ import { FETCH_LAKES } from "./types";
 import { CURRENT_LAKE } from "./types";
 
 export const fetchLakes = () => dispatch => {
-  fetch("http://localhost:5000/lakes/")
+  fetch("https://jasonserverhoustonfishing.herokuapp.com/lakes/")
     .then(res => res.json())
     .then(result =>
       dispatch({

@@ -1,7 +1,7 @@
 import { FETCH_MESSAGES, POST_MESSAGE, PATCH_MESSAGE } from "../actions/types";
 
 export const fetchMessages = id => dispatch => {
-  const url = new URL("http://localhost:5000/messages/");
+  const url = new URL("https://jasonserverhoustonfishing.herokuapp.com/messages/");
   const params = { lake_id: id };
   // sets the passed in lake_id to params for the request for access in the server.
   url.search = new URLSearchParams(params);
@@ -16,7 +16,7 @@ export const fetchMessages = id => dispatch => {
 };
 export const postMessage = data => dispatch => {
   console.log(data);
-  fetch("http://localhost:5000/messages/add", {
+  fetch("https://jasonserverhoustonfishing.herokuapp.com/messages/add", {
     method: "POST",
     headers: {
       accept: "application/json",
@@ -40,7 +40,7 @@ export const postMessage = data => dispatch => {
 };
 export const patchMessage = data => dispatch => {
   console.log(data);
-  fetch("http://localhost:5000/messages/update/" + data.message_id, {
+  fetch("https://jasonserverhoustonfishing.herokuapp.com/messages/update/" + data.message_id, {
     method: "POST",
     headers: {
       accept: "application/json",

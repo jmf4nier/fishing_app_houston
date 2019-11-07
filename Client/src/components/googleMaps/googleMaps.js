@@ -1,6 +1,6 @@
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import React from "react";
-import history from "../../history";
+// import history from "../../history";
 import ReactDOM from "react-dom";
 
 class MapContainer extends React.Component {
