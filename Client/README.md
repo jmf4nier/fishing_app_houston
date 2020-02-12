@@ -66,3 +66,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+ <!-- begin 2/2/20 -->
+1.need to change oAuth login/signup page.  dont really know how it works right now. its seem to have my gmail account logged in by default. not great.  also it has no backout button if i dont want to use a specific account or click decline on the prompt. bad design?  it will let you put in a new email and password, but where is it stored?  also it refers to an account with dev-blah-blah
+<!-- end of 2/2/20 -->
+<!-- begin 2/9/20 -->
+1.Apparently passwords are handled by oauth in the users tab.  Users can create accounts with any email address and password they like, but are not verified until the verfication email automatically sent is clicked.  The login template itself is slightly configurable, but a custom url can also be used.  The logo has been changed to a fish.  The app name has been changed from 'myapp' to 'Houston Fishing' inside account settings.  
+* also, user roles can be assigned via oauth *
+2. integrated redux-persist.  old solution for an old problem.  persisting entire store for now.  reason: lost state on refresh and using routes dependent on redux state.  probably a better way.
+<!-- end of 2/9/20 -->

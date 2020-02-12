@@ -1,44 +1,42 @@
-import React from "react";
-// import history from "./history";
-// import { Router, Route } from "react-router-dom";
-import "./App.css";
-import LakeIndex from "./components/lakes/lakeIndex";
-import Login from "./components/userForms/login";
-import SignUp from "./components/userForms/signUp";
-// import LakeShow from "./components/lakes/lakeShow";
-// import NavBar from "./components/navBar/navBar";
-import { connect } from "react-redux";
-import { fetchLakes } from "./components/actions/lakeActions";
+import React, {useState, useEffect} from "react";
+import NavBar from "./components/navBar/NavBar";
+import { useAuth0 } from "./react-auth0-spa";
+import { Router, Route, Switch } from "react-router-dom";
+import Profile from "./components/protectedPages/Profile";
+import history from "./utils/History";
+import PrivateRoute from "./components/protectedPages/PrivateRoute";
+import ExternalApi from "./components/ExternalApi";
+import Home from "./components/lakes/LakeHome";
+import LakeShowPage from './components/lakes/LakeShowPage'
+import { useSelector } from "react-redux";
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.fetchLakes();
-    window.scrollTo(0, 0);
-  }
 
-  render() {
-    return (
-      <div className="App">
-        {this.props.showLogin ? <Login /> : null}
-        {this.props.showSignup ? <SignUp /> : null}
-        
-        <LakeIndex />
-      </div>
-    );
+
+function App() {
+  const lake = useSelector(state => state.lakeReducer.currentLake)
+ 
+	const { loading } = useAuth0();
+  
+	if (loading) {
+		return <div>Loading...</div>;
   }
+  
+
+	return (
+		<div className="App">
+			<Router history={history}>
+				<header>
+					<NavBar />
+				</header>
+				<Switch>
+					<Route path="/" exact component={Home} />
+          <Route  path='/lake' component={LakeShowPage} />
+					<PrivateRoute path="/profile" component={Profile} />
+					<PrivateRoute path="/external-api" component={ExternalApi} />
+				</Switch>
+			</Router>
+		</div>
+	);
 }
 
-const mapStateToProps = state => ({
-  lake: state.lakeReducer.currentLake,
-  showLogin: state.userReducer.showLogin,
-  showSignup: state.userReducer.showSignup
-});
-export default connect(
-  mapStateToProps,
-  { fetchLakes }
-)(App);
-
-// {/* <Router history={history}>
-//           <NavBar/>
-//           <Route exact path='/' component={LakeIndex}/>
-//         </Router> */}
+export default App;

@@ -1,53 +1,104 @@
 import React from "react";
-import { connect } from "react-redux";
-import { currentLake } from "../actions/lakeActions";
-import { Grid, Card } from "semantic-ui-react";
+import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import history from '../../utils/History'
+// import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+// import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Link from "@material-ui/core/Link";
+import { CURRENT_LAKE } from "../actions/types";
 
-class LakeCard extends React.Component {
-  state = {
-    showLake: false
-  };
-  componentDidMount() {}
-  // handleClick = (lake) =>{
-  //     this.props.currentLake(lake)
-  //     this.props.handleShowView()
-  // }
+const useStyles = makeStyles(theme => ({
+	root: {
+		margin: ".75%",
+		maxWidth: 345,
+		height: "45vh" //view height to normalize size across all cards
+	},
+	shareIcon: {
+		color: "blue"
+	},
+	heartIcon: {
+		color: red[500] //material ui color on scale of 0-1000.imported
+		//future implement active, inactive
+	},
+	link: {
+		fontSize: "2vh" //responsive
+	},
+	media: {
+		height: "25vh", //attempt at responsiveness
+		paddingTop: "56.25%" // 16:9
+	},
+	expand: {
+		transform: "rotate(0deg)",
+		marginLeft: "auto",
+		transition: theme.transitions.create("transform", {
+			duration: theme.transitions.duration.shortest
+		})
+	},
+	expandOpen: {
+		transform: "rotate(180deg)"
+	},
+	avatar: {
+		backgroundColor: red[500]
+	}
+}));
 
-  render() {
-    const lakes = this.props.lakes.map(lake => (
-      <Card
-        style={{ margin: "1em" }}
-        onClick={() => this.props.handleClick(lake)}
-        key={lake._id}
-      >
-        <img src={lake.images[0]} height="200px" width="auto" alt="lake" />
-        <Card.Content>
-          <Card.Header>{lake.name}</Card.Header>
-          <Card.Meta>
-            <span className="city">{lake.locality}</span>
-          </Card.Meta>
-          <Card.Description>{lake.species.join(", ")}</Card.Description>
-        </Card.Content>
-        <Card.Content extra></Card.Content>
-      </Card>
-    ));
+export default function LakeCard(props) {
+	const { lake } = props;
+	const classes = useStyles();
+  const dispatch = useDispatch()
+  
+	const handleSelection = () => {
+    dispatch({type: CURRENT_LAKE, payload: lake})
+    history.push('/lake') 
+	};
 
-    return (
-      <Grid style={{ marginLeft: "1%", marginRight: "1%" }}>
-        <Grid.Row>
-          {lakes.map((lake, i) => (
-            <div key={i} style={{ flex: "25" }}> {lake}</div>
-          ))}
-        </Grid.Row>
-      </Grid>
-    );
-  }
+	return (
+		<Card className={classes.root} onClick={()=>handleSelection()}>
+			
+				<CardMedia
+					className={classes.media}
+					image={lake.images[0]}
+					title={lake.name}
+				/>
+		
+			<CardContent>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{lake.description.slice(0, 200) + " "}
+					<Link className={classes.link} href={"#"} title="Learn More">
+						...
+					</Link>
+				</Typography>
+			</CardContent>
+			<CardActions disableSpacing>
+				<IconButton
+					className={classes.heartIcon}
+					aria-label="add to favorites"
+					title="add to favorites"
+					disabled={false}
+					//   onClick={} for turning it grey if already a favorite
+				>
+					<FavoriteIcon />
+				</IconButton>
+				<IconButton
+					className={classes.shareIcon}
+					aria-label="share"
+					title="share"
+				>
+					<ShareIcon />
+				</IconButton>
+			
+			</CardActions>
+		
+		</Card>
+	);
 }
-
-const mapStateToProps = state => ({
-  lakes: state.lakeReducer.lakes
-});
-export default connect(
-  mapStateToProps,
-  { currentLake }
-)(LakeCard);

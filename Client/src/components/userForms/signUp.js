@@ -1,121 +1,75 @@
-import React from "react";
-import { Form, Container, Button } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { postUser, showLogin, showSignup } from "../actions/userActions";
+import React, { useState } from "react";
 
-class SignUp extends React.Component {
-  state = {
-    password: null,
-    username: null,
-    email: null,
-    error: null
-  };
+export default function Signup() {
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState(null);
 
-  handleCancelClick = async () => {
-    await this.props.showSignup(false);
-    this.props.showLogin(true);
-  };
+    const handleChange = e => {
+        if (e.target.name === "email") {
+            setEmail(e.target.value);
+        }
+        if (e.target.name === "password") {
+            setPassword(e.target.value);
+        }
+        if (e.target.name === "username") {
+            setUsername(e.target.value);
+        }
+        return e;
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = document.getElementById('signup-form') //grab form for reset
 
-  handleSubmit = async () => {
-    const data = this.state;
-    await this.props.postUser(data);
-    this.setState({
-      password: null,
-      email: null
-    });
-
-    if (this.props.currentUser.error) {
-      window.alert(this.props.currentUser.error);
-      let form = document.getElementById("signup-form");
-      form.reset();
-    } else {
-      window.alert("Account Created!");
-      this.props.showSignup(false);
-      this.props.showLogin(true);
-    }
-  };
-
-  handleChange = e => {
-    const info = e.target.value;
-    if (e.target.name === "password") {
-      this.setState({
-        password: info
-      });
-    } else if (e.target.name === "username") {
-      this.setState({
-        username: info
-      });
-    } else if (e.target.name === "email") {
-      this.setState({
-        email: info
-      });
-    }
-  };
-
-  render() {
+        fetch("http://localhost:5000/users/signup", {
+            method: "POST",
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "username": username,
+                "email": email,
+                "password": password
+            })
+        })
+        .then(rsp => rsp.json())
+        .then(response=>{
+            //clear form
+            form.reset()    
+            //error or success message
+            console.log(response)
+        })
+        
+    };
     return (
-      <Container id="signup-div" style={{ width: "90%", height: "40%" }}>
-        <h1
-          style={{
-            marginTop: "3%",
-            color: "white",
-            fontFamily: "Times New Roman",
-            fontSize: "3vw"
-          }}
-        >
-          Please Sign Up!
-        </h1>
-        {this.state.error ? <div>{this.state.error}</div> : null}
-        <Form
-          id="signup-form"
-          onSubmit={e => this.handleSubmit(e)}
-          style={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}
-        >
-          <Form.Group style={{ fontSize: "150%" }} widths="equal">
-            <Form.Input
-              fluid
-              name="username"
-              label="Username"
-              placeholder="Username"
-              onChange={event => this.handleChange(event)}
+        <form id='signup-form'>
+            <input
+                type="text"
+                required
+                name="email"
+                placeholder="email"
+                onChange={e => handleChange(e)}
             />
-            <Form.Input
-              fluid
-              name="password"
-              label="Password"
-              placeholder="Password"
-              type="password"
-              onChange={event => this.handleChange(event)}
+            <input
+                type="text"
+                required
+                name="username"
+                placeholder="username"
+                onChange={e => handleChange(e)}
             />
-            <Form.Input
-              fluid
-              name="email"
-              label="Email"
-              placeholder="Email@email.com"
-              onChange={event => this.handleChange(event)}
+            <input
+                type="password"
+                required
+                name="password"
+                placeholder="password"
+                onChange={e => handleChange(e)}
             />
-          </Form.Group>
-          <Form.Button>Submit</Form.Button>
-          <Button
-            onClick={() => this.handleCancelClick()}
-            color="red"
-            tabIndex={1}
-            size="medium"
-            style={{ margin: "1%" }}
-          >
-            Cancel
-          </Button>
-        </Form>
-      </Container>
+            <input
+                type="submit"
+                value="Submit"
+                onClick={(e) => handleSubmit(e)}
+            />
+        </form>
     );
-  }
 }
-const mapStateToProps = state => ({
-  currentUser: state.userReducer.currentUser,
-  showSignup: state.userReducer.showSignup,
-  showLogin: state.userReducer.showLogin
-});
-export default connect(
-  mapStateToProps,
-  { postUser, showLogin, showSignup }
-)(SignUp);

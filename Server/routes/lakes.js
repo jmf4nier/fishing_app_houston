@@ -12,8 +12,7 @@ router.route("/:id").get((req, res) => {
     .then(lake => res.json(lake))
     .catch(err => res.status(400).json("Error: " + err));
 });
-module.exports = router;
-
+module.exports = router
 // NOT USED AT THE MOMENT
 
 // router.route('/:id').delete((req, res) => {
