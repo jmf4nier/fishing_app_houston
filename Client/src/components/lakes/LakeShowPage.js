@@ -8,7 +8,7 @@ const LakeShowPage = (props) => {
     return(
         <div style={{textAlign:'center', margin: '10vh'}}>
             <h1>{lake.name}</h1>
-            <img src={lake.images[0]}/>
+            <img alt='lake' src={lake.images[0]}/>
             <p>{lake.description}</p>
         </div>
     )

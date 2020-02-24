@@ -1,4 +1,5 @@
 // src/components/NavBar.js
+// eslint-disable-next-line
 import Link from "@material-ui/core/Link";
 import { useAuth0 } from "../../react-auth0-spa";
 import React from "react";
@@ -15,11 +16,14 @@ import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
+// eslint-disable-next-line
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import MultipleSelect from './MultipleSelect'
 import MoreIcon from "@material-ui/icons/MoreVert";
 import HomeIcon from "@material-ui/icons/Home";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import history from "../../utils/History";
+import { useDispatch } from "react-redux";
+import { setSearchParams } from '../actions/searchBarActions'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -43,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      marginLeft: "25%"
+      marginLeft: '18%'
     }
   },
   search: {
@@ -100,10 +104,11 @@ export default function NavBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const dispatch = useDispatch()
+  // eslint-disable-next-line
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  // eslint-disable-next-line
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -203,6 +208,7 @@ export default function NavBar() {
               <SearchIcon />
             </div>
             <InputBase
+              onChange={(e)=> setSearchParams(dispatch, e.target.value)}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -211,6 +217,7 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+          <MultipleSelect />
           <Typography className={classes.title} variant="h4" noWrap>
             Houston Fishing
           </Typography>

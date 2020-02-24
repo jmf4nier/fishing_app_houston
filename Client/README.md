@@ -76,3 +76,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 * also, user roles can be assigned via oauth *
 2. integrated redux-persist.  old solution for an old problem.  persisting entire store for now.  reason: lost state on refresh and using routes dependent on redux state.  probably a better way.
 <!-- end of 2/9/20 -->
+<!-- begin 2/23/20 -->
+1. added searchbar functionality. can search names of all the lakes. is filtered on the lakehome comp.
+2. added selectbox for species filtering.  not applied yet. not happy with the fit and finish of the chips.
+3. changed the actions for the initial lake fetch and added the searchbar action/reducer. now bringing in action function into component and doing dispatchs outside of component. maybe not fully implemented on all dispatches.....???
+<!-- end 2/23 -->

@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
+
 import LakeCards from "./LakeCards";
 import { Grid } from "@material-ui/core";
-import { FETCH_LAKES } from "../actions/types";
-import { useDispatch } from "react-redux";
+import { fetchLakes } from "../actions/lakeActions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Home = props => {
-	const [lakes, setLakes] = useState([]);
+const Home =  () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		async function fetchData() {
-			await fetch("https://jasonserverhoustonfishing.herokuapp.com/lakes")
-				.then(res => res.json())
-				.then(result => {
-					dispatch({ type: FETCH_LAKES, payload: result });
-					setLakes(result);
-				});
-		}
-		fetchData();
-	}, []);
+		fetchLakes(dispatch);
+	}, [dispatch]);
+	const lakes = useSelector(state => state.lakeReducer.lakes);
+	const search = useSelector(state => state.searchBarReducer.searchParams);
+	const filteredCards = lakes.filter(lake => {
+		const {name, locality} = lake
+		let searchTerm = search.toLowerCase();
+		
+		let lowerCaseName = name.toLowerCase();
+		return lowerCaseName.match(searchTerm);
+	});
+	console.log(filteredCards);
 	return (
 		<div>
 			<Grid container direction="row" justify="center" alignItems="center">
-				{lakes.map(lake => {
+				{filteredCards.map(lake => {
 					return <LakeCards key={lake._id} lake={lake} />;
 				})}
 			</Grid>
@@ -29,3 +31,13 @@ const Home = props => {
 	);
 };
 export default Home;
+
+// async function fetchData() {
+// 	await fetch("https://jasonserverhoustonfishing.herokuapp.com/lakes")
+// 		.then(res => res.json())
+// 		.then(result => {
+// 			dispatch({ type: FETCH_LAKES, payload: result });
+// 			setLakes(result);
+// 		});
+// }
+// fetchData();

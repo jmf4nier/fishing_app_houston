@@ -8,3 +8,4 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const SHOW_LOGIN = "SHOW_LOGIN";
 export const SHOW_SIGNUP = "SHOW_SIGNUP";
+export const SET_SEARCH_PARAMS = "SET_SEARCH_PARAMS"

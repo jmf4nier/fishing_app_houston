@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import history from '../../utils/History'
+import history from "../../utils/History";
 // import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 // import CardHeader from "@material-ui/core/CardHeader";
@@ -15,7 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 // import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Link from "@material-ui/core/Link";
-import { CURRENT_LAKE } from "../actions/types";
+import { currentLake } from "../actions/lakeActions";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -55,22 +55,25 @@ const useStyles = makeStyles(theme => ({
 export default function LakeCard(props) {
 	const { lake } = props;
 	const classes = useStyles();
-  const dispatch = useDispatch()
-  
+	const dispatch = useDispatch();
+
 	const handleSelection = () => {
-    dispatch({type: CURRENT_LAKE, payload: lake})
-    history.push('/lake') 
+		currentLake(dispatch, lake);
+		history.push("/lake");
 	};
 
 	return (
-		<Card className={classes.root} onClick={()=>handleSelection()}>
-			
+		<Card className={classes.root}>
+			{/* //for getting the mouse over link effect */}
+			<a href="">
 				<CardMedia
+					onClick={() => handleSelection()}
 					className={classes.media}
 					image={lake.images[0]}
 					title={lake.name}
 				/>
-		
+			</a>
+
 			<CardContent>
 				<Typography variant="body2" color="textSecondary" component="p">
 					{lake.description.slice(0, 200) + " "}
@@ -96,9 +99,7 @@ export default function LakeCard(props) {
 				>
 					<ShareIcon />
 				</IconButton>
-			
 			</CardActions>
-		
 		</Card>
 	);
 }
