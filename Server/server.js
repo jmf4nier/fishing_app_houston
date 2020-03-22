@@ -35,8 +35,9 @@ const checkJwt = jwt({
 
 // Define an endpoint that must be called with an access token
 app.get("/api/external", checkJwt, (req, res) => {
+    // console.log(checkJwt)
     res.send({
-        msg: "I am your server"
+        msg: "I am your updated server"
     });
 });
 app.use(cors());

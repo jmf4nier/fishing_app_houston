@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import history from "../../utils/History";
+import history from "../../utils/history";
 // import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 // import CardHeader from "@material-ui/core/CardHeader";
@@ -15,7 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 // import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Link from "@material-ui/core/Link";
-import { currentLake } from "../actions/lakeActions";
+import { currentLake, favoritedLake } from "../actions/lakeActions";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -54,9 +54,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function LakeCard(props) {
 	const { lake } = props;
+	const [isLiked, setLiked] = useState(false)
+	const [likeMessage, setLikeMessage] = useState('')
 	const classes = useStyles();
-	const dispatch = useDispatch();
-
+	const dispatch = useDispatch()
+	const handleFavorite = () => {
+		setLikeMessage('Added to your favorites!')
+		setTimeout(()=>setLikeMessage(''), 2000)
+		favoritedLake(dispatch, lake)
+		console.log(lake.name)
+		setLiked(!isLiked)
+	}
+	
+	
 	const handleSelection = () => {
 		currentLake(dispatch, lake);
 		history.push("/lake");
@@ -65,6 +75,8 @@ export default function LakeCard(props) {
 	return (
 		<Card className={classes.root}>
 			{/* //for getting the mouse over link effect */}
+			
+			{(likeMessage !== '')? <h2 style={{color: 'red', textAlign:'center'}}>{likeMessage}</h2>: null}
 			<a href="">
 				<CardMedia
 					onClick={() => handleSelection()}
@@ -87,8 +99,8 @@ export default function LakeCard(props) {
 					className={classes.heartIcon}
 					aria-label="add to favorites"
 					title="add to favorites"
-					disabled={false}
-					//   onClick={} for turning it grey if already a favorite
+					disabled={isLiked}
+					onClick={() => handleFavorite()} 
 				>
 					<FavoriteIcon />
 				</IconButton>

@@ -8,13 +8,17 @@ import PrivateRoute from "./components/protectedPages/PrivateRoute";
 import ExternalApi from "./components/ExternalApi";
 import Home from "./components/lakes/LakeHome";
 import LakeShowPage from "./components/lakes/LakeShowPage";
+import LoadingIcon from "./components/material_ui_components/LoadingIcon";
 
 function App() {
-
 	const { loading } = useAuth0();
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<div style={{ marginTop: "50vh", marginLeft: "50vw" }}>
+				<LoadingIcon />
+			</div>
+		);
 	}
 
 	return (

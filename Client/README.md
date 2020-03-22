@@ -81,3 +81,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 2. added selectbox for species filtering.  not applied yet. not happy with the fit and finish of the chips.
 3. changed the actions for the initial lake fetch and added the searchbar action/reducer. now bringing in action function into component and doing dispatchs outside of component. maybe not fully implemented on all dispatches.....???
 <!-- end 2/23 -->
+<!--start 2/24-->
+1. worked on the select filter a bit.  didnt work cuz i couldnt figure out the array vs array dynamic.  i think just change it to a single select for now.  not worth the headache.  
+2. added action and reducer for holding selected species
+<!--end 2/24-->
+<!-- start 3/1 -->
+1. changed from multiple select to simple select for both species and location sorting
+2. added actions/ reducer for location sort.  
+3. changes to lakeHome to reflect new sorts.
+<!-- end 3/1 -->
+<!-- start 3/5 -->
+1. added onClick to the favorites icon on the lakeCards.  when clicked it gives a timed message and triggers an action saving the lake to redux under favoritedLakes.  using a weird filter in the reducer to keep duplicates out.  
+*this is temporary until i get the database side going.*
+2. need to track favorited status of a card in redux so that reloads dont re-enable the heart icon once its been pressed.
+<!-- end 3/5 -->
+start 3/15
+1. fought with heroku again.  turned out to be an argument between the standard 'build' script and the 'heroku-postbuild' script.

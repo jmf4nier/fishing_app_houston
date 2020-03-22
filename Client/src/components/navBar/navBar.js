@@ -8,22 +8,20 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 // import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 // eslint-disable-next-line
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import MultipleSelect from './MultipleSelect'
+import SimpleSelect from './SimpleSelect'
 import MoreIcon from "@material-ui/icons/MoreVert";
 import HomeIcon from "@material-ui/icons/Home";
-import history from "../../utils/History";
-import { useDispatch } from "react-redux";
-import { setSearchParams } from '../actions/searchBarActions'
+import history from "../../utils/history";
+import SearchBar from './SearchBar'
+import { speciesFilter, locationFilter } from "../actions/searchBarActions";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -33,15 +31,15 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  logoutLink: {
+  logout: {
     margin: 0,
     color: "white",
-    fontSize: "1.5vh"
+    fontSize: "3vh"
   },
-  loginLink: {
+  login: {
     margin: 0,
     color: "white",
-    fontSize: "1.5vh"
+    fontSize: "3vh"
   },
   title: {
     display: "none",
@@ -99,12 +97,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const species = [
+	"largemouth bass",
+	"smallmouth bass",
+	"crappie",
+	"bream",
+	"yellow catfish",
+	"blue catfish",
+	"carp",
+	"armored catfish",
+	"tilapia",
+	"white bass"
+];
+const local = [
+  'East Houston Area',
+  'West Houston Area',
+  'North Houston Area',
+  'South Houston Area',
+  'Central Houston Area'
+]
+
 export default function NavBar() {
+
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const dispatch = useDispatch()
   // eslint-disable-next-line
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -203,21 +221,12 @@ export default function NavBar() {
            </IconButton>
           )}
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              onChange={(e)=> setSearchParams(dispatch, e.target.value)}
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-          <MultipleSelect />
+          <SearchBar classes={classes}/>
+
+            {/* select boxes for species and location sorting */}
+          <SimpleSelect values={species} name='Species' action={speciesFilter}/>
+          <SimpleSelect values={local} name='Location' action={locationFilter} />
+
           <Typography className={classes.title} variant="h4" noWrap>
             Houston Fishing
           </Typography>
